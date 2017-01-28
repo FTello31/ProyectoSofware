@@ -22,6 +22,7 @@ import pe.edu.ulima.randitos.bean.Usuario;
 public class ConexionMongo {
 
     private final MongoClient mClient;
+    private MongoCollection colUsu;
 
     public ConexionMongo() {
         mClient = new MongoClient(new MongoClientURI("mongodb://pepe:pepe@ds133249.mlab.com:33249/tesisuldb"));
@@ -31,12 +32,11 @@ public class ConexionMongo {
         //  mc=new MongoClient("localhost",27017);
 
         MongoDatabase db = mClient.getDatabase("tesisuldb");
-        MongoCollection colEval
-                = db.getCollection("usuario");
+        colUsu = db.getCollection("usuario");
 
         List<Usuario> usuarios = new ArrayList<>();
         ArrayList<Document> usuDocs
-                = (ArrayList<Document>) colEval.find().into(new ArrayList());
+                = (ArrayList<Document>) colUsu.find().into(new ArrayList());
         usuDocs.stream().forEach((reg) -> {
             usuarios.add(
                     new Usuario(
@@ -47,6 +47,10 @@ public class ConexionMongo {
         });
         return usuarios;
 
+    }
+
+    public MongoCollection getColUsu() {
+        return colUsu;
     }
 
 }

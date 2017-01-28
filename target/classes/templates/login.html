@@ -178,19 +178,20 @@
 
     <body>
         <div class="wrapper">
-            <form class="login" action="/login" method="post">
+            <form class="login" action="/login" method="get">
                 <p class="title">Login</p>
-                <input type="text" placeholder="Usuario" autofocus id="user" name="user"/>
+                <input type="text" placeholder="Usuario" autofocus id="usuario" name="usuario"/>
                 <i class="fa fa-user"></i>
-                <input type="password" placeholder="Password" id="pass" name="pass"/>
+                <input type="password" placeholder="Password" id="contrasena" name="contrasena"/>
                 <i class="fa fa-key"></i>
                <!-- <a href="">Forgot your password?</a> -->
-               
-                <button type="submit" value="Ingresar ">
+               <a href="/main">
+                <button type="submit" value="Ingresar" >
                     <i class="spinner"></i>
                     <span class="state">Login</span>
-                  
+
                 </button>
+               </a>
             </form>
            
         </div>

@@ -5,6 +5,12 @@
  */
 package pe.edu.ulima.randitos.blogapp;
 
+
+import com.google.gson.Gson;
+import com.mongodb.DBCollection;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +61,16 @@ public class Main {
         }, new Jinja2TemplateEngine());
         
         get("/login", (req, resp) -> {
-           
+                  
+            ConexionMongo gestor = new ConexionMongo();
+            try{
+                System.out.println("\n*****************************");
+                System.out.println(new Gson().toJson(gestor.obtener())); 
+                System.out.println("*****************************\n");
+            }catch(Exception e){
+              //  return e.getMessage();
+            }
+            
             return new ModelAndView(null, "login.html");
         }, new Jinja2TemplateEngine());
         

@@ -18,20 +18,21 @@ import spark.TemplateEngine;
  *
  * @author Administrator
  */
-public class Jinja2TemplateEngine extends TemplateEngine{
-    public Jinja2TemplateEngine(){
+public class Jinja2TemplateEngine extends TemplateEngine {
+
+    public Jinja2TemplateEngine() {
     }
 
     @Override
     public String render(ModelAndView mav) {
         try {
             String template = Resources.toString(
-                    Resources.getResource("templates/" + mav.getViewName()), 
+                    Resources.getResource("templates/" + mav.getViewName()),
                     Charsets.UTF_8
             );
             Jinjava jinjava = new Jinjava();
             return jinjava.render(
-                    template, 
+                    template,
                     (Map<String, ?>) mav.getModel()
             );
         } catch (Exception ex) {
@@ -40,5 +41,5 @@ public class Jinja2TemplateEngine extends TemplateEngine{
         }
         return null;
     }
-    
+
 }

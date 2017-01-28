@@ -26,14 +26,13 @@ public class ConexionMongo {
     private MongoCollection colUsu;
     private MongoDatabase db;
     private MongoCollection<Document> collection;
-   
 
     public ConexionMongo() {
         mClient = new MongoClient(new MongoClientURI("mongodb://pepe:pepe@ds133249.mlab.com:33249/tesisuldb"));
         db = mClient.getDatabase("tesisuldb");
         colUsu = db.getCollection("usuario");
         collection = db.getCollection("usuario");
-        
+
     }
 
     public List<Usuario> obtener() {
@@ -54,8 +53,7 @@ public class ConexionMongo {
 
     public MongoCollection getColUsu() {
         return colUsu;
-    }        
-
+    }
 
     public MongoDatabase getDb() {
         return db;
@@ -64,12 +62,5 @@ public class ConexionMongo {
     public MongoCollection<Document> getCollection() {
         return collection;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

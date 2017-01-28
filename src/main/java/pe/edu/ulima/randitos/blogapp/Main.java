@@ -65,32 +65,12 @@ public class Main {
             return new ModelAndView(map, "main.html");
         }, new Jinja2TemplateEngine());
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-      
-        
-        
-        
-        
-        
-        
         get("/login", (req, resp) -> {
-            ConexionMongo gestor = new ConexionMongo(); 
+            ConexionMongo gestor = new ConexionMongo();
 
             String usuario = req.queryParams("usuario");
             String contrasena = req.queryParams("contrasena");
-            
+
             Document filtro = new Document();
             filtro.append("usuario", usuario);
             filtro.append("contrasena", contrasena);
@@ -106,22 +86,11 @@ public class Main {
             } else {
                 return new ModelAndView(null, "main.html");
             }
-        
-        
+
         }, new Jinja2TemplateEngine());
 
         
-        
-        //System.out.println(usuario);
-            //System.out.println(contrasena);
-            /*
-              usuario: Christian Rupay
-                password: stroker1
-             */
-        
-        
-        
-        /*
+ /*
         post("/login", (req, resp) -> {
             ConexionMongo gestor = new ConexionMongo();
             String usuario = req.queryParams("usuario");
@@ -129,77 +98,16 @@ public class Main {
 
             
             
-            BasicDBObject filter = new BasicDBObject();
-            filter.put("usuario", usuario);
-            filter.put("contrasena", contrasena);
-               
-            
-                if(filter ==gestor.obtener()){
-                System.out.println(" \n    \n \n***********SIIII**********\n");
-            }else{
-                                System.out.println(" \n    \n \n*nooooooooooooooooooooooooooooooooooooooooooooooooooo******\n");
-
-            }
-            
-            
-            System.out.println(" \n    \n \n***" + gestor.obtener() +" IIII**********\n");
-
-            return new ModelAndView(null, "main.html");
+        
 
         });
 
-        post("/login", (req, resp) -> {
-            ConexionMongo gestor = new ConexionMongo();
-            
-            
-            String usuario = req.queryParams("user");
-            String pass = req.queryParams("pass");
-            
-            if(usuario.equalsIgnoreCase(gestor.getColUsu())){
-                if(pass.equalsIgnoreCase((String) myDoc.get("pass"))){
-                    return new ModelAndView(null, "main.html");
-                }else{
-                   return new ModelAndView(null, "login.html"); 
-                }
-            }else{
-                return new ModelAndView(null, "index.html");
-            }
-            
-        });
         
         
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        get("/login", (req, resp) -> {
-            ConexionMongo gestor = new ConexionMongo(); 
-
-            String usuario = req.queryParams("usuario");
-            String contrasena = req.queryParams("contrasena");
-            
-            
-            BasicDBObject filter = new BasicDBObject();
-            filter.put("usuario", usuario);
-            filter.put("contrasena", contrasena);
-                      
-            
-                System.out.println("\n*****************************");
-               System.out.println(new Gson().toJson(gestor.obtener()));
-                System.out.println("*****************************\n");
-                
-                
-                
-            return new ModelAndView(null, "login.html");
-        }, new Jinja2TemplateEngine());
+     
          */
     }
 

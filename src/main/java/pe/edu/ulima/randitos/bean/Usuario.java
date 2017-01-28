@@ -10,6 +10,7 @@ package pe.edu.ulima.randitos.bean;
  * @author Fernando
  */
 public class Usuario {
+
     private String usuario;
     private String contrasena;
 
@@ -36,7 +37,5 @@ public class Usuario {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-    
-    
-    
+
 }

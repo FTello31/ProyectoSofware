@@ -39,25 +39,25 @@ and open the template in the editor.
             <div class="col-md-3">
                 <!-- Menu del sitio -->
                 {% block menu %}
-                
+
                 {% if tipo_usuario=='visitante' %}
                 <ul class="nav nav-pills nav-stacked">
-                    
+
                     <!-- Como un if para ponerle active solo cuando el id_menu que le pasamos en main.java sea ... -->
-                    
+
                     <li role="presentation" class=" {{'active' if id_menu=='listar_post'}}">
                         <a href="#">Ver Posts</a></li>
-                    
+
                     <li role="presentation" class=" {{'active' if id_menu=='help'}}">
                         <a href="#">Ayuda</a></li>
                 </ul>
-                
+
                 {% else %}
-                
+
                 <ul class="nav nav-pills nav-stacked">
-                    
+
                     <!-- Como un if para ponerle active solo cuando el id_menu que le pasamos en main.java sea ... -->
-                    
+
                     <li role="presentation" class=" {{'active' if id_menu=='listar_post'}}">
                         <a href="#">Ver Posts</a></li>
                     <li role="presentation" class=" {{'active' if id_menu=='add_post'}}">
@@ -66,13 +66,13 @@ and open the template in the editor.
                         <a href="#">Ayuda</a></li>
                 </ul>
                 {% endif %}
-                
+
                 {% endblock menu %}
-                
-                
-                
-                
-                
+
+
+
+
+
                 <!-- Fin Menu del sitio -->
             </div>
             <div class="col-md-9">

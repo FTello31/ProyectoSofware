@@ -27,18 +27,36 @@ import static spark.Spark.stop;
 public class Main {
 
     public static void main(String[] args) {
-
         get("/parar", (req, resp) -> {
             stop();
             return "";
         });
 
-        get("/listar_post", (req, resp) -> {
+        post("/listar_post", (req, resp) -> {
             HashMap<String, Object> map = new HashMap<>();
             map.put("id_menu", "listar_post");
             map.put("tipo_usuario", "publicador");
 
-            return new ModelAndView(map, "main.html");
+            //jala del login.html metodo post action listar_post
+            ConexionMongo gestor = new ConexionMongo();
+
+            String usuario = req.queryParams("usuario");
+            String contrasena = req.queryParams("contrasena");
+
+            Document filtro = new Document();
+            filtro.append("usuario", usuario);
+            filtro.append("contrasena", contrasena);
+
+            Document myDoc = gestor.getCollection().find(filtro).first();
+
+            //System.out.println(usuario);
+            //System.out.println(contrasena);
+            if (myDoc == null) {
+                return new ModelAndView(null, "login.html");
+
+            } else {
+                return new ModelAndView(map, "main.html");
+            }
         }, new Jinja2TemplateEngine());
 
         get("/add_post", (req, resp) -> {
@@ -65,50 +83,10 @@ public class Main {
             return new ModelAndView(map, "main.html");
         }, new Jinja2TemplateEngine());
 
-        get("/login", (req, resp) -> {
-            ConexionMongo gestor = new ConexionMongo();
-
-            String usuario = req.queryParams("usuario");
-            String contrasena = req.queryParams("contrasena");
-
-            Document filtro = new Document();
-            filtro.append("usuario", usuario);
-            filtro.append("contrasena", contrasena);
-
-            Document myDoc = gestor.getCollection().find(filtro).first();
-
-            System.out.println(usuario);
-            System.out.println(contrasena);
-
-            if (myDoc == null) {
-                return new ModelAndView(null, "login.html");
-
-            } else {
-                return new ModelAndView(null, "main.html");
-            }
-
+        get("/", (req, resp) -> {
+            return new ModelAndView(null, "login.html");
         }, new Jinja2TemplateEngine());
 
-        
- /*
-        post("/login", (req, resp) -> {
-            ConexionMongo gestor = new ConexionMongo();
-            String usuario = req.queryParams("usuario");
-            String contrasena = req.queryParams("contrasena");
-
-            
-            
-        
-
-        });
-
-        
-        
-        
-        
-        
-     
-         */
     }
 
 }

@@ -21,12 +21,16 @@ import java.util.List;
 import org.bson.Document;
 import spark.ModelAndView;
 import static spark.Spark.get;
+import static spark.Spark.port;
 import static spark.Spark.post;
 import static spark.Spark.stop;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        port(obtenerPuertoHeroku());
+
         get("/parar", (req, resp) -> {
             stop();
             return "";
@@ -87,6 +91,14 @@ public class Main {
             return new ModelAndView(null, "login.html");
         }, new Jinja2TemplateEngine());
 
+    }
+
+    static int obtenerPuertoHeroku() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567;
     }
 
 }

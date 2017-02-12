@@ -2,37 +2,89 @@
 
 {% block contenido %}
 <!-- Contenido del sitio -->
-<h2>Listado de Posts</h2>
-<button type="button" class="btn btn-success">Nuevo Post</button>
+
+<div>
+    <h3>Acta de reuniones</h3>
+</div>
 <table class="table table-hover">
-    <tr>
-        <th>Id</th>
-        <th>Titulo</th>
-        <th>Fecha</th>
-        <th>Estado</th>
-        <th>Acciones</th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>¿Por qué el cielo es azul y no verde?</td>
-        <td>12/01/2017</td>
-        <td>Publicado</td>
-        <td>
-            <button type="button" class="btn btn-default">Editar</button>
-            <button type="button" class="btn btn-default">Eliminar</button>
-        </td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>Perú en los mundiales de Fútbol</td>
-        <td>13/01/2017</td>
-        <td>Borrador</td>
-        <td>
-            <button type="button" class="btn btn-default">Editar</button>
-            <button type="button" class="btn btn-default">Eliminar</button>
-        </td>
-    </tr>
+    <thead>
+        <tr>
+            <th>Título de reunión</th>
+            <th>Fecha</th>
+            <th>Observación</th>
+            <th>Asesor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Titulo 1</td>
+            <td>20/08/2017</td>
+            <td>Vas a jalar de forma espectacular</td>
+            <td>Profesor Hernan Quintana</td>
+        </tr>
+    </tbody>
+
 </table>
+
+<div>
+    <h3>Información de asesor</h3>
+</div>
+<div align="left">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nombre:</th>
+                <td>Hernan Quintana</td>
+            </tr>
+            <tr>
+                <th>Disponibilidad:</th>
+                <td>Lunes | 10am - 11am | V - 102</td>
+            </tr>
+            <tr>
+                <th>Correo</th>
+                <td>HQuintana@ulima.edu.pe</td>
+            </tr>
+            <tr>
+                <th>Celular</th>
+                <td>9932533949</td>
+            </tr>
+        </thead>
+
+    </table>
+</div>
+<div>
+    <h3>Fechas importantes</h3>
+</div>
+<div align="right">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>Reunión con Asesor 1 | Lunes 30 | W - 205</td>
+                <td>Reunión con Asesor 2 | Viernes 15 | W - 205</td>
+                <td>Reunión con Asesor 3 | Martes 30 | W - 205</td>
+                <td>Reunión con Asesor 4 | Lunes 15 | W - 205</td>
+            </tr>
+        </thead>
+
+
+    </table>
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Fin Contenido del sitio -->
 {% endblock contenido %}
 

@@ -13,14 +13,24 @@ public class Usuario {
 
     private String usuario;
     private String contrasena;
+    private String tipo;
 
-    public Usuario() {
-    }
-
-    public Usuario(String usuario, String password) {
+    
+    public Usuario(String usuario, String contrasena, String tipo) {
         this.usuario = usuario;
-        this.contrasena = password;
+        this.contrasena = contrasena;
+        this.tipo = tipo;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    
 
     public String getUsuario() {
         return usuario;

@@ -1,0 +1,42 @@
+
+
+{% extends templates/base.html %}
+
+
+
+{% block contenido %}
+<div class="container">
+    <div class="row">
+        <form class="login" method="post" action="registrarTesis">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Título de Tesis</label>
+                <input type="text" class="form-control" id="ttesis" placeholder="Título de tesis" name="ttesis">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Escuela</label>
+                <select class="form-control" id="escuela" name="escuela">
+                    <option value="Ingeniería">Ingeniería</option>
+                    <option value="Humanidades">Humanidades</option>
+                    <option value="Negocios">Negocios</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Explicación del Tema</label>
+                <input type="text" class="form-control" id="etema" placeholder="Explicación" name="etema">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Ingrese Apellido del posible asesor</label>
+                <input id="asesor" class="form-control" placeholder="Ingrese Apellido del posible asesor" name="asesor">
+
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> No soy robot :v
+                </label>
+            </div>
+            <button type="submit" class="btn btn-default">Enviar tema</button>
+        </form>
+
+    </div> 
+</div>
+{% endblock contenido %}

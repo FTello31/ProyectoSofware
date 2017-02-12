@@ -14,6 +14,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import pe.edu.ulima.randitos.bean.Tema;
 import pe.edu.ulima.randitos.bean.Usuario;
 
 /**
@@ -26,16 +27,17 @@ public class ConexionMongo {
     private MongoCollection colUsu;
     private MongoDatabase db;
     private MongoCollection<Document> collection;
+    private MongoCollection colTema;
 
     public ConexionMongo() {
-        mClient = new MongoClient(new MongoClientURI("mongodb://pepe:pepe@ds133249.mlab.com:33249/tesisuldb"));
+        mClient = new MongoClient(new MongoClientURI("mongodb://pepe:pepe@ds147979.mlab.com:47979/tesisuldb"));
         db = mClient.getDatabase("tesisuldb");
         colUsu = db.getCollection("usuario");
         collection = db.getCollection("usuario");
-
+        colTema = db.getCollection("tema");
     }
 
-    public List<Usuario> obtener() {
+    public List<Usuario> obtenerUsuario() {
         List<Usuario> usuarios = new ArrayList<>();
         ArrayList<Document> usuDocs
                 = (ArrayList<Document>) colUsu.find().into(new ArrayList());
@@ -43,13 +45,35 @@ public class ConexionMongo {
             usuarios.add(
                     new Usuario(
                             reg.getString("usuario"),
-                            reg.getString("contrasena")
+                            reg.getString("password"),
+                            reg.getString("tipo")
                     )
             );
         });
         return usuarios;
 
     }
+    public List<Tema> obtenerTemas() {
+        List<Tema> temas = new ArrayList<>();
+        ArrayList<Document> usuTemas
+                = (ArrayList<Document>) colTema.find().into(new ArrayList());
+        usuTemas.stream().forEach((reg) -> {
+            temas.add(
+                    new Tema(
+                            reg.getString("ttesis"),
+                            reg.getString("escuela"),
+                            reg.getString("etema"),
+                            reg.getString("asesor")
+                    )
+            );
+        });
+        return temas;
+
+    }
+    
+    
+    
+    
 
     public MongoCollection getColUsu() {
         return colUsu;
@@ -63,4 +87,11 @@ public class ConexionMongo {
         return collection;
     }
 
+    public MongoCollection getColTema() {
+        return colTema;
+    }
+
+    public void setColTema(MongoCollection colTema) {
+        this.colTema = colTema;
+    }
 }

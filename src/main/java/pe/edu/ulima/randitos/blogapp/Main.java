@@ -38,7 +38,7 @@ public class Main {
             return "";
         });
 
-        get("/login", (req, resp) -> {
+        get("/", (req, resp) -> {
             return new ModelAndView(null, "login.html");
         }, new Jinja2TemplateEngine());
 

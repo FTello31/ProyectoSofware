@@ -47,11 +47,7 @@ public class Main {
             return new ModelAndView(map, "main.html");
         }, new Jinja2TemplateEngine());
 
-        get("/buscarAsesor", (req, resp) -> {
-
-            map.get("tipo_usuario");
-            return new ModelAndView(map, "registrarTesis.html");
-        }, new Jinja2TemplateEngine());
+        
 
         post("/main", (req, resp) -> {
 
@@ -78,6 +74,12 @@ public class Main {
             }
         }, new Jinja2TemplateEngine());
 
+        
+        get("/buscarAsesor", (req, resp) -> {
+            map.get("tipo_usuario");
+            return new ModelAndView(map, "registrarTesis.html");
+        }, new Jinja2TemplateEngine());
+        
         post("/registrarTesis", (req, resp) -> {
 
             map.get("tipo_usuario");
@@ -104,6 +106,41 @@ public class Main {
             //System.out.println(usuario);
             //System.out.println(contrasena);
         }, new Jinja2TemplateEngine());
+        
+        
+        get("/registrarReunion", (req, resp) -> {
+            map.get("tipo_usuario");
+            return new ModelAndView(map, "registrarReunion.html");
+        }, new Jinja2TemplateEngine());
+        
+        post("/registrarReunion", (req, resp) -> {
+
+            map.get("tipo_usuario");
+
+            //jala del login.html metodo post action listar_post
+            ConexionMongo gestor = new ConexionMongo();
+
+            String reunion = req.queryParams("reunion");
+            String ob_asesor = req.queryParams("ob_asesor");
+            String ob_alumno = req.queryParams("ob_alumno");
+            
+
+            Document myDoc = new Document();
+            myDoc.append("reunion", reunion);
+            myDoc.append("ob_asesor", ob_asesor);
+            myDoc.append("ob_alumno", ob_alumno);
+            myDoc.append("estado", "open");
+
+            gestor.getColReunion().insertOne(myDoc);
+
+            return new ModelAndView(map, "registrarReunion.html");
+
+            //System.out.println(usuario);
+            //System.out.println(contrasena);
+        }, new Jinja2TemplateEngine());
+        
+        
+        
 
         get("/asesoriaTesis", (req, resp) -> {
             map.get("tipo_usuario");
@@ -144,6 +181,14 @@ public class Main {
             return new ModelAndView(map, "main.html");
         }, new Jinja2TemplateEngine());
 
+        
+        get("/verificarActasReunion", (req, resp) -> {
+            map.get("tipo_usuario");
+            return new ModelAndView(map, "verificarActasReunion.html");
+        }, new Jinja2TemplateEngine());
+        
+        
+        
     }
 
     static int obtenerPuertoHeroku() {

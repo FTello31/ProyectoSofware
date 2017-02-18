@@ -28,6 +28,7 @@ public class ConexionMongo {
     private MongoDatabase db;
     private MongoCollection<Document> collection;
     private MongoCollection colTema;
+    private MongoCollection colReunion;
 
     public ConexionMongo() {
         mClient = new MongoClient(new MongoClientURI("mongodb://pepe:pepe@ds147979.mlab.com:47979/tesisuldb"));
@@ -35,6 +36,7 @@ public class ConexionMongo {
         colUsu = db.getCollection("usuario");
         collection = db.getCollection("usuario");
         colTema = db.getCollection("tema");
+        colReunion = db.getCollection("reunion");
     }
 
     public List<Usuario> obtenerUsuario() {
@@ -93,5 +95,14 @@ public class ConexionMongo {
 
     public void setColTema(MongoCollection colTema) {
         this.colTema = colTema;
+    }
+    
+    
+    public void setColReunion(MongoCollection colReunion) {
+        this.colReunion = colReunion;
+    }
+
+    public MongoCollection getColReunion() {
+        return colReunion;
     }
 }

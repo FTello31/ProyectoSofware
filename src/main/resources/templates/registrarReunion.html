@@ -1,0 +1,31 @@
+{% extends templates/base.html %}
+
+
+
+{% block contenido %}
+<div class="container">
+    <div class="row">
+        <form class="login" method="post" action="registrarReunion">
+            <div class="form-group">
+                <label for="reunion">Nombre de la reunión</label>
+                <select class="form-control" id="reunion" name="reunion">
+                    <option value="Reunión con asesor #1">Reunión con asesor #1</option>
+                    <option value="Reunión con asesor #2">Reunión con asesor #2</option>
+                    <option value="Reunión con asesor #3">Reunión con asesor #3</option>
+                    <option value="Reunión con asesor #4">Reunión con asesor #4</option>
+                </select>
+            </div>  
+            <div class="form-group">
+                <label for="observacion">Observaciones del Asesor</label>
+                <input type="text" class="form-control" id="ob_asesor" placeholder="Observaciones del Asesor" name="ob_asesor">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Observaciones del Alumno</label>
+                <input type="text" class="form-control" id="ob_alumno" placeholder="Observaciones del Alumno" name="ob_alumno">
+            </div>
+            <button type="submit" class="btn btn-default">Enviar tema</button>
+        </form>
+
+    </div> 
+</div>
+{% endblock contenido %}

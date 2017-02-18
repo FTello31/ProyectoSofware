@@ -23,10 +23,13 @@
                     </tr>
                 </thead>
                 <tbody class="table-hover">
+
+                    {% for tema in temas %}
                     <tr>
-                        <td>Titulo 1</td>
-                        <td>20/08/2017</td>
-                        <td>Vas a jalar de forma espectacular</td>
+                        <td>{{tema.ttesis}}</td>
+                        <td>{{tema.escuela}}</td>
+                        <td>{{tema.etema}}</td>
+                        <td>{{tema.asesor}}</td>
                         <td>
                             <div class="checkbox">
                                 <label>
@@ -35,6 +38,8 @@
                             </div>
                         </td>
                     </tr>
+                    {% endfor %}
+
                 </tbody>
             </table>
 

@@ -17,6 +17,7 @@ import com.mongodb.client.MongoCursor;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import org.bson.Document;
 import pe.edu.ulima.randitos.bean.Tema;
@@ -139,14 +140,19 @@ public class Main {
 
             ConexionMongo gestor = new ConexionMongo();
 
-        
-
+            List<Tema> temas = new ArrayList<>();
+            
             for (Document cur : gestor.getColTema().find()) {
-                System.out.println(cur.toJson());
+                temas.add(new Tema(cur.getString("ttesis"),
+                            cur.getString("escuela"),
+                            cur.getString("etema"),
+                            cur.getString("asesor")
+                ));
             }
+            
+            map.put("temas", temas);
 
             //System.out.println("\n\n\n");
-
             return new ModelAndView(map, "asesoriaTesis.html");
         }, new Jinja2TemplateEngine());
 
@@ -176,16 +182,12 @@ public class Main {
             return new ModelAndView(map, "verificarActasReunion.html");
         }, new Jinja2TemplateEngine());
 
-        
         get("/feedbackProfe", (req, resp) -> {
 
             map.get("tipo_usuario");
             return new ModelAndView(map, "feedbackProfe.html");
         }, new Jinja2TemplateEngine());
-        
-        
-        
-        
+
     }
 
     static int obtenerPuertoHeroku() {

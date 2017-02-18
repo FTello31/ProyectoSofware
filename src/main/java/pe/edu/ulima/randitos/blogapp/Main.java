@@ -47,8 +47,6 @@ public class Main {
             return new ModelAndView(map, "main.html");
         }, new Jinja2TemplateEngine());
 
-        
-
         post("/main", (req, resp) -> {
 
             //jala del login.html metodo post action listar_post
@@ -74,12 +72,11 @@ public class Main {
             }
         }, new Jinja2TemplateEngine());
 
-        
         get("/buscarAsesor", (req, resp) -> {
             map.get("tipo_usuario");
             return new ModelAndView(map, "registrarTesis.html");
         }, new Jinja2TemplateEngine());
-        
+
         post("/registrarTesis", (req, resp) -> {
 
             map.get("tipo_usuario");
@@ -106,13 +103,12 @@ public class Main {
             //System.out.println(usuario);
             //System.out.println(contrasena);
         }, new Jinja2TemplateEngine());
-        
-        
+
         get("/registrarReunion", (req, resp) -> {
             map.get("tipo_usuario");
             return new ModelAndView(map, "registrarReunion.html");
         }, new Jinja2TemplateEngine());
-        
+
         post("/registrarReunion", (req, resp) -> {
 
             map.get("tipo_usuario");
@@ -123,7 +119,6 @@ public class Main {
             String reunion = req.queryParams("reunion");
             String ob_asesor = req.queryParams("ob_asesor");
             String ob_alumno = req.queryParams("ob_alumno");
-            
 
             Document myDoc = new Document();
             myDoc.append("reunion", reunion);
@@ -138,25 +133,20 @@ public class Main {
             //System.out.println(usuario);
             //System.out.println(contrasena);
         }, new Jinja2TemplateEngine());
-        
-        
-        
 
         get("/asesoriaTesis", (req, resp) -> {
             map.get("tipo_usuario");
 
             ConexionMongo gestor = new ConexionMongo();
 
-            /*List<Tema> tema = new ArrayList<>();
-            List<Usuario> usuario = new ArrayList<>();
-            tema = gestor.obtenerTemas();
-            usuario = gestor.obtenerUsuario();
-            tema.forEach(System.out::println);
-            usuario.forEach(System.out::println);
-             */
-            
-            
-            
+        
+
+            for (Document cur : gestor.getColTema().find()) {
+                System.out.println(cur.toJson());
+            }
+
+            //System.out.println("\n\n\n");
+
             return new ModelAndView(map, "asesoriaTesis.html");
         }, new Jinja2TemplateEngine());
 
@@ -181,11 +171,18 @@ public class Main {
             return new ModelAndView(map, "main.html");
         }, new Jinja2TemplateEngine());
 
-        
         get("/verificarActasReunion", (req, resp) -> {
             map.get("tipo_usuario");
             return new ModelAndView(map, "verificarActasReunion.html");
         }, new Jinja2TemplateEngine());
+
+        
+        get("/feedbackProfe", (req, resp) -> {
+
+            map.get("tipo_usuario");
+            return new ModelAndView(map, "feedbackProfe.html");
+        }, new Jinja2TemplateEngine());
+        
         
         
         

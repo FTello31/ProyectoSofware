@@ -24,16 +24,16 @@ import pe.edu.ulima.randitos.bean.Usuario;
 public class ConexionMongo {
 
     private final MongoClient mClient;
-    private MongoCollection colUsu;
+    //private MongoCollection colUsu;
     private MongoDatabase db;
     private MongoCollection<Document> collection;
-    private MongoCollection colTema;
-    private MongoCollection colReunion;
+    private MongoCollection<Document> colTema;
+    private MongoCollection<Document> colReunion;
 
     public ConexionMongo() {
         mClient = new MongoClient(new MongoClientURI("mongodb://pepe:pepe@ds147979.mlab.com:47979/tesisuldb"));
         db = mClient.getDatabase("tesisuldb");
-        colUsu = db.getCollection("usuario");
+        
         collection = db.getCollection("usuario");
         colTema = db.getCollection("tema");
         colReunion = db.getCollection("reunion");
@@ -42,7 +42,7 @@ public class ConexionMongo {
     public List<Usuario> obtenerUsuario() {
         List<Usuario> usuarios = new ArrayList<>();
         ArrayList<Document> usuDocs
-                = (ArrayList<Document>) colUsu.find().into(new ArrayList());
+                = (ArrayList<Document>) collection.find().into(new ArrayList());
         usuDocs.stream().forEach((reg) -> {
             usuarios.add(
                     new Usuario(
@@ -72,37 +72,40 @@ public class ConexionMongo {
         return temas;
 
     }
-    
-    
-    
-    
 
-    public MongoCollection getColUsu() {
-        return colUsu;
-    }
 
     public MongoDatabase getDb() {
         return db;
+    }
+
+    public void setDb(MongoDatabase db) {
+        this.db = db;
     }
 
     public MongoCollection<Document> getCollection() {
         return collection;
     }
 
-    public MongoCollection getColTema() {
+    public void setCollection(MongoCollection<Document> collection) {
+        this.collection = collection;
+    }
+
+    public MongoCollection<Document> getColTema() {
         return colTema;
     }
 
-    public void setColTema(MongoCollection colTema) {
+    public void setColTema(MongoCollection<Document> colTema) {
         this.colTema = colTema;
     }
-    
-    
-    public void setColReunion(MongoCollection colReunion) {
-        this.colReunion = colReunion;
-    }
 
-    public MongoCollection getColReunion() {
+    public MongoCollection<Document> getColReunion() {
         return colReunion;
     }
+
+    public void setColReunion(MongoCollection<Document> colReunion) {
+        this.colReunion = colReunion;
+    }
+    
+    
+  
 }

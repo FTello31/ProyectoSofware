@@ -1,0 +1,39 @@
+{% extends templates/base.html %}
+
+
+
+{% block contenido %}
+<div class="container">
+    <div class="row">
+        <form class="login" method="post" action="feedbackCalificacion">
+            <div class="form-group">
+                <label for="reunion">Seleccionar Tesis</label>
+                <select class="form-control" id="reunion" name="reunion">
+                    <option value="Reunión con asesor #1">Tesis #1</option>
+                    <option value="Reunión con asesor #2">Tesis #2</option>
+                    <option value="Reunión con asesor #3">Tesis #3</option>
+                    <option value="Reunión con asesor #4">Tesis #4</option>
+                </select>
+            </div>  
+            <div class="form-group">
+                <label for="observacion">Feedback al Alumno</label>
+                <input type="text" class="form-control" id="ob_asesor" placeholder="Observaciones del Asesor" name="ob_asesor">
+            </div>
+
+            <div class="ec-stars-wrapper">
+
+                <label for="exampleInputFile">Calificar segun criterio</label>
+
+                <a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
+                <a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
+                <a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
+                <a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
+                <a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+            </div>
+
+            <button type="submit" class="btn btn-default">Enviar feedback</button>
+        </form>
+
+    </div> 
+</div>
+{% endblock contenido %}

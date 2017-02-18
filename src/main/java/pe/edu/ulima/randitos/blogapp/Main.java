@@ -62,7 +62,10 @@ public class Main {
 
             Document myDoc = gestor.getCollection().find(filtro).first();
             map.put("tipo_usuario", myDoc.getString("tipo"));
-
+            map.put("nombre", myDoc.getString("nombre"));
+            map.put("correo", myDoc.getString("correo"));
+            map.put("celular", myDoc.getString("celular"));
+            
             //System.out.println(usuario);
             //System.out.println(contrasena);
             if (myDoc == null) {
@@ -137,26 +140,37 @@ public class Main {
 
         get("/asesoriaTesis", (req, resp) -> {
             map.get("tipo_usuario");
-
             ConexionMongo gestor = new ConexionMongo();
-
             List<Tema> temas = new ArrayList<>();
-            
+
             for (Document cur : gestor.getColTema().find()) {
                 temas.add(new Tema(cur.getString("ttesis"),
-                            cur.getString("escuela"),
-                            cur.getString("etema"),
-                            cur.getString("asesor")
+                        cur.getString("escuela"),
+                        cur.getString("etema"),
+                        cur.getString("asesor")
                 ));
             }
-            
             map.put("temas", temas);
-
             //System.out.println("\n\n\n");
             return new ModelAndView(map, "asesoriaTesis.html");
         }, new Jinja2TemplateEngine());
 
-        get("/add_post", (req, resp) -> {
+        get("/verificarActasReunion", (req, resp) -> {
+            map.get("tipo_usuario");
+            return new ModelAndView(map, "verificarActasReunion.html");
+        }, new Jinja2TemplateEngine());
+
+        get("/feedbackProfe", (req, resp) -> {
+            map.get("tipo_usuario");
+            return new ModelAndView(map, "feedbackProfe.html");
+        }, new Jinja2TemplateEngine());
+
+        get("/repositorioTesis", (req, resp) -> {
+            map.get("tipo_usuario");
+            return new ModelAndView(map, "repositorioTesis.html");
+        }, new Jinja2TemplateEngine());
+
+        /*get("/add_post", (req, resp) -> {
 
             map.put("tipo_usuario", "publicador");
 
@@ -172,22 +186,10 @@ public class Main {
         }, new Jinja2TemplateEngine());
 
         get("/ver", (req, resp) -> {
-
             map.put("tipo_usuario", "visitante");
             return new ModelAndView(map, "main.html");
         }, new Jinja2TemplateEngine());
-
-        get("/verificarActasReunion", (req, resp) -> {
-            map.get("tipo_usuario");
-            return new ModelAndView(map, "verificarActasReunion.html");
-        }, new Jinja2TemplateEngine());
-
-        get("/feedbackProfe", (req, resp) -> {
-
-            map.get("tipo_usuario");
-            return new ModelAndView(map, "feedbackProfe.html");
-        }, new Jinja2TemplateEngine());
-
+         */
     }
 
     static int obtenerPuertoHeroku() {

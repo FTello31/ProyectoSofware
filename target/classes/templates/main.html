@@ -12,29 +12,41 @@
             <th>Título de reunión</th>
             <th>Fecha</th>
             <th>Observación</th>
+            {% if tipo_usuario=='alumno' %}
             <th>Asesor</th>
+             {% else %}
+            <th>Asesorado</th>
+             {% endif %}
         </tr>
     </thead>
     <tbody>
         <tr>
+              <!-- Aca debe jalar de la BAse de datos-->
             <td>Titulo 1</td>
             <td>20/08/2017</td>
+            
             <td>Vas a jalar de forma espectacular</td>
             <td>Profesor Hernan Quintana</td>
+            
         </tr>
     </tbody>
 
 </table>
 
 <div>
+    {% if tipo_usuario=='alumno' %}
     <h3>Información de asesor</h3>
+    {% else %}
+    <h3>Información de alumnos asesorados</h3>
+    {% endif %}
 </div>
 <div align="left">
     <table class="table table-hover">
         <thead>
+            {% if tipo_usuario=='alumno' %}
             <tr>
                 <th>Nombre:</th>
-                <td>Hernan Quintana</td>
+                <td>{{nombre}}</td>
             </tr>
             <tr>
                 <th>Disponibilidad:</th>
@@ -42,12 +54,23 @@
             </tr>
             <tr>
                 <th>Correo</th>
-                <td>HQuintana@ulima.edu.pe</td>
+                <td>{{correo}}</td>
             </tr>
             <tr>
                 <th>Celular</th>
-                <td>9932533949</td>
+                <td>{{celular}}</td>
             </tr>
+            {% else %}
+             <tr>
+                <th>Nombre:</th>
+                <td>{{nombre}}</td>
+            </tr>
+            <tr>
+                <th>Tema tesis:</th>
+                <td>Realizar App agropecuaria</td>
+            </tr>
+            
+            {% endif %}
         </thead>
 
     </table>
@@ -59,30 +82,22 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                {% if tipo_usuario=='alumno' %}
                 <td>Reunión con Asesor 1 | Lunes 30 | W - 205</td>
                 <td>Reunión con Asesor 2 | Viernes 15 | W - 205</td>
                 <td>Reunión con Asesor 3 | Martes 30 | W - 205</td>
                 <td>Reunión con Asesor 4 | Lunes 15 | W - 205</td>
+                {% else %}
+                <td>Reunión con Juan 1 | Lunes 30 | W - 205</td>
+                <td>Reunión con Juan 2 | Viernes 15 | W - 205</td>
+                <td>Reunión con Ricardo 3 | Martes 30 | W - 205</td>
+                {% endif %}
             </tr>
         </thead>
 
 
     </table>
 </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- Fin Contenido del sitio -->

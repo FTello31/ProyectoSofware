@@ -39,7 +39,7 @@ public class ConexionMongo {
         colReunion = db.getCollection("reunion");
     }
 
-    public List<Usuario> obtenerUsuario() {
+    /*public List<Usuario> obtenerUsuario() {
         List<Usuario> usuarios = new ArrayList<>();
         ArrayList<Document> usuDocs
                 = (ArrayList<Document>) collection.find().into(new ArrayList());
@@ -72,7 +72,7 @@ public class ConexionMongo {
         return temas;
 
     }
-
+*/
 
     public MongoDatabase getDb() {
         return db;

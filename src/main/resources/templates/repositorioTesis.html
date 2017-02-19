@@ -3,6 +3,8 @@
 {% block contenido %}
 <div class="container">
     <div class="row">
+
+        <!-- 
         <form class="login" method="post" action="repositorioTesis">
 
             <div class="form-group">
@@ -16,7 +18,7 @@
                 <select class="form-control" id="facultad" name="facultad">
                     <option value="Facultad #1">Arquitectura</option>
                     <option value="Facultad #2">Ing Sistemas</option>
-                    <option value="Facultad #3">Ing civil</option>
+                    <option value="Facultad #3">Ing Civil</option>
                     <option value="Facultad #3">Ing Industrial</option>
 
                 </select>
@@ -44,32 +46,38 @@
 
             <button type="submit" class="btn btn-default">Buscar</button>
 
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Titulo de Tesis</th>
-                        <th>Autor(es)</th>
-                        <th>Fecha publicacion</th>
-                        <th>Facultad</th>
-                        <th>Estado</th>
-                        <th>Archivo</th>
-
-                    </tr>
-                </thead>
-                <tbody class="table-hover">
-                    <tr>
-                        <td>Titulo 1</td>
-                        <td>Fernando Tello</td>
-                        <td>12/02/17</td>
-                        <td>Ing Sistemas</td>
-                        <td>Concluido</td>
-                        <td>Ver Archivo</td>
-
-                    </tr>
-                </tbody>
-            </table>
-
         </form>
+      Fin Contenido del sitio -->
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Titulo de Tesis</th>
+                    <th>Autor(es)</th>
+                    <th>Fecha publicacion</th>
+                    <th>Facultad</th>
+                    <th>Estado</th>
+                    <th>Archivo</th>
+
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+              
+                    {% for tesis in tesis %}
+                <tr>
+                    <td>{{tesis.titulo}}</td>
+                    <td>{{tesis.autor}}</td>
+                    <td>{{tesis.fecha}}</td>
+                    <td>{{tesis.facultad}}</td>
+                    <td>{{tesis.estado}}</td>
+                    <td>{{tesis.archivo}}</td>
+                </tr>
+                {% endfor %}
+
+
+                </tr>
+            </tbody>
+        </table>
+
 
     </div> 
 </div>

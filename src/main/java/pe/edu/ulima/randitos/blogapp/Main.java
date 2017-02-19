@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.bson.Document;
 import pe.edu.ulima.randitos.bean.Tema;
+import pe.edu.ulima.randitos.bean.Tesis;
 import pe.edu.ulima.randitos.bean.Usuario;
 import spark.ModelAndView;
 import static spark.Spark.get;
@@ -155,6 +156,9 @@ public class Main {
             return new ModelAndView(map, "asesoriaTesis.html");
         }, new Jinja2TemplateEngine());
 
+      
+        
+        
         get("/verificarActasReunion", (req, resp) -> {
             map.get("tipo_usuario");
             return new ModelAndView(map, "verificarActasReunion.html");
@@ -167,6 +171,30 @@ public class Main {
 
         get("/repositorioTesis", (req, resp) -> {
             map.get("tipo_usuario");
+    
+            ConexionMongo gestor = new ConexionMongo();
+            List<Tesis> tesis = new ArrayList<>();
+
+            for (Document cur : gestor.getColtesis().find()) {
+                tesis.add(new Tesis(cur.getString("titulo"),
+                        cur.getString("autor"),
+                        cur.getString("fecha"),
+                        cur.getString("facultad"),
+                        cur.getString("estado"),
+                        cur.getString("archivo")
+                         
+                ));
+            }
+            map.put("tesis", tesis);
+            //System.out.println("\n\n\n");
+            
+            
+            
+            
+            
+            
+            
+            
             return new ModelAndView(map, "repositorioTesis.html");
         }, new Jinja2TemplateEngine());
 

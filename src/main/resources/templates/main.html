@@ -1,11 +1,11 @@
 {% extends templates/base.html %}
 
+
+
 {% block contenido %}
 <!-- Contenido del sitio -->
 
-<div>
-    <h3>Acta de reuniones</h3>
-</div>
+<h3>Acta de reuniones</h3>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -14,32 +14,33 @@
             <th>Observación</th>
             {% if tipo_usuario=='alumno' %}
             <th>Asesor</th>
-             {% else %}
+            {% else %}
             <th>Asesorado</th>
-             {% endif %}
+            {% endif %}
         </tr>
     </thead>
     <tbody>
+
+        {% for reunion in reunion %}
         <tr>
-              <!-- Aca debe jalar de la BAse de datos-->
-            <td>Titulo 1</td>
-            <td>20/08/2017</td>
-            
-            <td>Vas a jalar de forma espectacular</td>
-            <td>Profesor Hernan Quintana</td>
-            
+            <td>{{reunion.reunion}}</td>
+            <td>{{reunion.obAsesor}}</td>
+            <td>{{reunion.obAlumno}}</td>
+            <td>{{reunion.estado}}</td>
+
         </tr>
+        {% endfor %}
+
     </tbody>
 
 </table>
 
-<div>
     {% if tipo_usuario=='alumno' %}
     <h3>Información de asesor</h3>
     {% else %}
     <h3>Información de alumnos asesorados</h3>
     {% endif %}
-</div>
+
 <div align="left">
     <table class="table table-hover">
         <thead>
@@ -61,7 +62,7 @@
                 <td>{{celular}}</td>
             </tr>
             {% else %}
-             <tr>
+            <tr>
                 <th>Nombre:</th>
                 <td>{{nombre}}</td>
             </tr>
@@ -69,15 +70,15 @@
                 <th>Tema tesis:</th>
                 <td>Realizar App agropecuaria</td>
             </tr>
-            
+
             {% endif %}
         </thead>
 
     </table>
 </div>
-<div>
+
     <h3>Fechas importantes</h3>
-</div>
+    
 <div align="right">
     <table class="table table-hover">
         <thead>

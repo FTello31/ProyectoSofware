@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import org.bson.Document;
+import pe.edu.ulima.randitos.bean.Reunion;
 import pe.edu.ulima.randitos.bean.Tema;
 import pe.edu.ulima.randitos.bean.Tesis;
 import pe.edu.ulima.randitos.bean.Usuario;
@@ -44,13 +45,15 @@ public class Main {
             return new ModelAndView(null, "login.html");
         }, new Jinja2TemplateEngine());
 
-        get("/home", (req, resp) -> {
+        get("/main", (req, resp) -> {
             map.get("tipo_usuario");
+            ConexionMongo gestor = new ConexionMongo();
+            map.put("reunion", gestor.obtenerReuniones());
+
             return new ModelAndView(map, "main.html");
         }, new Jinja2TemplateEngine());
 
         post("/main", (req, resp) -> {
-
             //jala del login.html metodo post action listar_post
             ConexionMongo gestor = new ConexionMongo();
 
@@ -66,6 +69,9 @@ public class Main {
             map.put("nombre", myDoc.getString("nombre"));
             map.put("correo", myDoc.getString("correo"));
             map.put("celular", myDoc.getString("celular"));
+
+            map.put("reunion", gestor.obtenerReuniones());
+           
             
             //System.out.println(usuario);
             //System.out.println(contrasena);
@@ -122,14 +128,14 @@ public class Main {
             ConexionMongo gestor = new ConexionMongo();
 
             String reunion = req.queryParams("reunion");
-            String ob_asesor = req.queryParams("ob_asesor");
-            String ob_alumno = req.queryParams("ob_alumno");
+            String obAsesor = req.queryParams("obAsesor");
+            String obAlumno = req.queryParams("obAlumno");
 
             Document myDoc = new Document();
             myDoc.append("reunion", reunion);
-            myDoc.append("ob_asesor", ob_asesor);
-            myDoc.append("ob_alumno", ob_alumno);
-            myDoc.append("estado", "open");
+            myDoc.append("obAsesor", obAsesor);
+            myDoc.append("obAlumno", obAlumno);
+            myDoc.append("estado", "activo");
 
             gestor.getColReunion().insertOne(myDoc);
 
@@ -142,23 +148,12 @@ public class Main {
         get("/asesoriaTesis", (req, resp) -> {
             map.get("tipo_usuario");
             ConexionMongo gestor = new ConexionMongo();
-            List<Tema> temas = new ArrayList<>();
 
-            for (Document cur : gestor.getColTema().find()) {
-                temas.add(new Tema(cur.getString("ttesis"),
-                        cur.getString("escuela"),
-                        cur.getString("etema"),
-                        cur.getString("asesor")
-                ));
-            }
-            map.put("temas", temas);
+            map.put("temas", gestor.obtenerTemas());
             //System.out.println("\n\n\n");
             return new ModelAndView(map, "asesoriaTesis.html");
         }, new Jinja2TemplateEngine());
 
-      
-        
-        
         get("/verificarActasReunion", (req, resp) -> {
             map.get("tipo_usuario");
             return new ModelAndView(map, "verificarActasReunion.html");
@@ -171,30 +166,12 @@ public class Main {
 
         get("/repositorioTesis", (req, resp) -> {
             map.get("tipo_usuario");
-    
-            ConexionMongo gestor = new ConexionMongo();
-            List<Tesis> tesis = new ArrayList<>();
 
-            for (Document cur : gestor.getColtesis().find()) {
-                tesis.add(new Tesis(cur.getString("titulo"),
-                        cur.getString("autor"),
-                        cur.getString("fecha"),
-                        cur.getString("facultad"),
-                        cur.getString("estado"),
-                        cur.getString("archivo")
-                         
-                ));
-            }
-            map.put("tesis", tesis);
+            ConexionMongo gestor = new ConexionMongo();
+
+            map.put("tesis", gestor.obtenerTesis());
             //System.out.println("\n\n\n");
-            
-            
-            
-            
-            
-            
-            
-            
+
             return new ModelAndView(map, "repositorioTesis.html");
         }, new Jinja2TemplateEngine());
 

@@ -14,7 +14,9 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import pe.edu.ulima.randitos.bean.Reunion;
 import pe.edu.ulima.randitos.bean.Tema;
+import pe.edu.ulima.randitos.bean.Tesis;
 import pe.edu.ulima.randitos.bean.Usuario;
 
 /**
@@ -29,16 +31,16 @@ public class ConexionMongo {
     private MongoCollection<Document> collection;
     private MongoCollection<Document> colTema;
     private MongoCollection<Document> colReunion;
-     private MongoCollection<Document> coltesis;
+    private MongoCollection<Document> coltesis;
 
     public ConexionMongo() {
         mClient = new MongoClient(new MongoClientURI("mongodb://pepe:pepe@ds147979.mlab.com:47979/tesisuldb"));
         db = mClient.getDatabase("tesisuldb");
-        
+
         collection = db.getCollection("usuario");
         colTema = db.getCollection("tema");
         colReunion = db.getCollection("reunion");
-        coltesis =db.getCollection("tesis");
+        coltesis = db.getCollection("tesis");
     }
 
     /*public List<Usuario> obtenerUsuario() {
@@ -57,24 +59,50 @@ public class ConexionMongo {
         return usuarios;
 
     }
+    
+     */
+    public List<Reunion> obtenerReuniones() {
+        List<Reunion> reunion = new ArrayList<>();
+
+        for (Document cur : getColReunion().find()) {
+            reunion.add(new Reunion(cur.getString("reunion"),
+                    cur.getString("obAsesor"),
+                    cur.getString("obAlumno"),
+                    cur.getString("estado")
+            ));
+        }
+        return reunion;
+
+    }
+
     public List<Tema> obtenerTemas() {
         List<Tema> temas = new ArrayList<>();
-        ArrayList<Document> usuTemas
-                = (ArrayList<Document>) colTema.find().into(new ArrayList());
-        usuTemas.stream().forEach((reg) -> {
-            temas.add(
-                    new Tema(
-                            reg.getString("ttesis"),
-                            reg.getString("escuela"),
-                            reg.getString("etema"),
-                            reg.getString("asesor")
-                    )
-            );
-        });
+
+        for (Document cur : getColTema().find()) {
+            temas.add(new Tema(cur.getString("ttesis"),
+                    cur.getString("escuela"),
+                    cur.getString("etema"),
+                    cur.getString("asesor")
+            ));
+        }
         return temas;
 
     }
-*/
+
+    public List<Tesis> obtenerTesis() {
+        List<Tesis> tesis = new ArrayList<>();
+
+        for (Document cur : getColtesis().find()) {
+            tesis.add(new Tesis(cur.getString("titulo"),
+                    cur.getString("autor"),
+                    cur.getString("fecha"),
+                    cur.getString("facultad"),
+                    cur.getString("estado"),
+                    cur.getString("archivo")
+            ));
+        }
+        return tesis;
+    }
 
     public MongoDatabase getDb() {
         return db;
@@ -115,7 +143,5 @@ public class ConexionMongo {
     public void setColtesis(MongoCollection<Document> coltesis) {
         this.coltesis = coltesis;
     }
-    
-    
-  
+
 }

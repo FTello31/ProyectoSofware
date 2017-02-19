@@ -83,8 +83,9 @@
 
     <table class="table table-hover">
         <thead>
+
+            {% if tipo_usuario=='alumno' %}
             <tr>
-                {% if tipo_usuario=='alumno' %}
                 <td>Reunión con Asesor 1 | Lunes 30 | W - 205</td>
             </tr>
             <tr>
@@ -93,11 +94,16 @@
 
             {% else %}
             <tr>
-        <td>Reunión con Juan 1 | Lunes 30 | W - 205</td>
-        <td>Reunión con Juan 2 | Viernes 15 | W - 205</td>
-        <td>Reunión con Ricardo 3 | Martes 30 | W - 205</td>
-        {% endif %}
-        </tr>
+                <td>Reunión con Juan 1 | Lunes 30 | W - 205</td>
+            </tr>
+            <tr>
+                <td>Reunión con Juan 2 | Viernes 15 | W - 205</td>
+            </tr>
+            <tr>
+                <td>Reunión con Ricardo 3 | Martes 30 | W - 205</td>
+            </tr>
+            {% endif %}
+
         </thead>
 
 

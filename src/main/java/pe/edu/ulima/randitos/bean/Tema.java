@@ -17,7 +17,7 @@ public class Tema {
     private String asesor;
 
     private String autor;
-    
+
     public Tema() {
     }
 
@@ -36,8 +36,6 @@ public class Tema {
     public void setAutor(String autor) {
         this.autor = autor;
     }
-
-    
 
     public String getTtesis() {
         return ttesis;
@@ -71,7 +69,4 @@ public class Tema {
         this.asesor = asesor;
     }
 
-    
-    
-    
 }

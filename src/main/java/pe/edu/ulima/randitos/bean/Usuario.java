@@ -14,9 +14,9 @@ public class Usuario {
     private String usuario;
     private String contrasena;
     private String tipo;
-     private String nombre;
-     private String correo;
-     private String celular;
+    private String nombre;
+    private String correo;
+    private String celular;
 
     public Usuario(String usuario, String contrasena, String tipo, String nombre, String correo, String celular) {
         this.usuario = usuario;
@@ -75,6 +75,4 @@ public class Usuario {
         this.celular = celular;
     }
 
-    
-    
 }

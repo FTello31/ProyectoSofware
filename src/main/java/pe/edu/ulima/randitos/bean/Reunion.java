@@ -10,7 +10,7 @@ package pe.edu.ulima.randitos.bean;
  * @author Fernando
  */
 public class Reunion {
-    
+
     private String reunion;
     private String obAsesor;
     private String obAlumno;
@@ -54,6 +54,5 @@ public class Reunion {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
-    
+
 }

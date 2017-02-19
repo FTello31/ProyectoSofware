@@ -74,8 +74,5 @@ public class Tesis {
     public void setArchivo(String archivo) {
         this.archivo = archivo;
     }
-    
-    
-    
-    
+
 }

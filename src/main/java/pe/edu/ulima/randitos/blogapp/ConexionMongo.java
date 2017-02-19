@@ -102,7 +102,7 @@ public class ConexionMongo {
         List<Tema> temas = new ArrayList<>();
         Document filtro = new Document();
         filtro.append("estado", "activo");
-        
+
         for (Document cur : getColTema().find(filtro)) {
             temas.add(new Tema(cur.getString("ttesis"),
                     cur.getString("escuela"),
@@ -114,12 +114,7 @@ public class ConexionMongo {
         return temas;
 
     }
-    
-    
-    
-    
-    
-    
+
     public List<Tesis> obtenerTesis() {
         List<Tesis> tesis = new ArrayList<>();
 
@@ -135,34 +130,26 @@ public class ConexionMongo {
         return tesis;
     }
 
-    
-    public List<Feedback> obtenerFeedback(){
+    public List<Feedback> obtenerFeedback() {
         List<Feedback> feedback = new ArrayList<>();
         for (Document cur : getColFeed().find()) {
             feedback.add(new Feedback(cur.getString("tesis"),
                     cur.getString("feedback"),
                     cur.getString("calificacion")
-            
             ));
         }
         return feedback;
     }
 
-    
-     public String obtenerFecha(){
-    Calendar cal = new GregorianCalendar();
-            String dia = Integer.toString(cal.get(Calendar.DATE));
-            String mes = Integer.toString(cal.get(Calendar.MONTH));
-            String annio = Integer.toString(cal.get(Calendar.YEAR));
+    public String obtenerFecha() {
+        Calendar cal = new GregorianCalendar();
+        String dia = Integer.toString(cal.get(Calendar.DATE));
+        String mes = Integer.toString(cal.get(Calendar.MONTH));
+        String annio = Integer.toString(cal.get(Calendar.YEAR));
 
-            String fecha = dia+"/" +mes+"/" +annio;
-    return fecha;
+        String fecha = dia + "/" + mes + "/" + annio;
+        return fecha;
     }
-    
-    
-    
-    
-
 
     public MongoCollection<Document> getColFeed() {
         return colFeed;
@@ -172,10 +159,6 @@ public class ConexionMongo {
         this.colFeed = colFeed;
     }
 
-    
-    
-    
-    
     public MongoDatabase getDb() {
         return db;
     }

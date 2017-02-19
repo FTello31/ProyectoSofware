@@ -1,9 +1,7 @@
-
 package pe.edu.ulima.randitos.bean;
 
-
 public class Feedback {
-    
+
     private String tesis;
     private String feedback;
     private String calificacion;
@@ -37,6 +35,5 @@ public class Feedback {
     public void setCalificacion(String calificacion) {
         this.calificacion = calificacion;
     }
-    
-    
+
 }

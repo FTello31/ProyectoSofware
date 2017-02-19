@@ -1,0 +1,47 @@
+{% extends templates/base.html %}
+
+
+
+{% block contenido %}
+<!-- Contenido del sitio -->
+
+<!-- home section -->
+            <div>
+                <h3>Reuniones por Firmar</h3>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre de la reunión</th>
+                        <th>Observaciones del Asesor</th>
+                        <th>Observaciones del Alumno</th>
+                        <th>¿Firmar?</th>
+                    </tr>
+                </thead>
+                <tbody class="table-hover">
+
+                    {% for reunion in reuniones %}
+                    <tr>
+                        <td>{{reunion.reunion}}</td>
+                        <td>{{reunion.obAsesor}}</td>
+                        <td>{{reunion.obAlumno}}</td>
+                        
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Acepto
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-default">Enviar respuesta</button>
+        </div> 
+    </div>
+
+    <!-- Fin Contenido del sitio -->
+    {% endblock contenido %}

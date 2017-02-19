@@ -138,6 +138,18 @@ public class Main {
             //System.out.println("\n\n\n");
             return new ModelAndView(map, "asesoriaTesis.html");
         }, new Jinja2TemplateEngine());
+        
+        
+        get("/registroReunionProfe", (req, resp) -> {
+            map.get("tipo_usuario");
+            ConexionMongo gestor = new ConexionMongo();
+            map.put("reuniones", gestor.obtenerReuniones());
+            //System.out.println("\n\n\n");
+            return new ModelAndView(map, "registroReunionProfe.html");
+        }, new Jinja2TemplateEngine());
+        
+        
+        
 
         get("/verificarActasReunion", (req, resp) -> {
             map.get("tipo_usuario");
@@ -153,7 +165,6 @@ public class Main {
             map.get("tipo_usuario");
 
             ConexionMongo gestor = new ConexionMongo();
-
             map.put("tesis", gestor.obtenerTesis());
             //System.out.println("\n\n\n");
 

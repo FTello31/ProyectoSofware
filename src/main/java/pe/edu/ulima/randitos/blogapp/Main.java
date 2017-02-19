@@ -170,6 +170,18 @@ public class Main {
 
             return new ModelAndView(map, "repositorioTesis.html");
         }, new Jinja2TemplateEngine());
+        
+        
+        
+         get("/visualizarFeedback", (req, resp) -> {
+            map.get("tipo_usuario");
+            ConexionMongo gestor = new ConexionMongo();
+            map.put("feeds", gestor.obtenerFeedback());
+            //System.out.println("\n\n\n");
+            return new ModelAndView(map, "visualizarFeedback.html");
+        }, new Jinja2TemplateEngine());
+        
+        
 
         /*get("/add_post", (req, resp) -> {
 

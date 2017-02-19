@@ -1,0 +1,34 @@
+{% extends templates/base.html %}
+
+
+
+{% block contenido %}
+
+<div>
+    <h3>FeedBack</h3>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Tesis</th>
+            <th>FeedBack</th>
+            <th>Calificación</th>
+
+        </tr>
+    </thead>
+    <tbody class="table-hover">
+
+        {% for feed in feeds %}
+        <tr>
+            <td>{{feed.tesis}}</td>
+            <td>{{feed.feedback}}</td>
+            <td>{{feed.calificacion}}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+
+<!-- Fin Contenido del sitio -->
+{% endblock contenido %}

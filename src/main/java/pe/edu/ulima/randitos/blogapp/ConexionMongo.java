@@ -14,6 +14,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import pe.edu.ulima.randitos.bean.Feedback;
 import pe.edu.ulima.randitos.bean.Reunion;
 import pe.edu.ulima.randitos.bean.Tema;
 import pe.edu.ulima.randitos.bean.Tesis;
@@ -32,6 +33,7 @@ public class ConexionMongo {
     private MongoCollection<Document> colTema;
     private MongoCollection<Document> colReunion;
     private MongoCollection<Document> coltesis;
+    private MongoCollection<Document> colFeed;
 
     public ConexionMongo() {
         mClient = new MongoClient(new MongoClientURI("mongodb://pepe:pepe@ds147979.mlab.com:47979/tesisuldb"));
@@ -41,6 +43,7 @@ public class ConexionMongo {
         colTema = db.getCollection("tema");
         colReunion = db.getCollection("reunion");
         coltesis = db.getCollection("tesis");
+        colFeed = db.getCollection("feed");
     }
 
     /*public List<Usuario> obtenerUsuario() {
@@ -77,8 +80,8 @@ public class ConexionMongo {
 
     public List<Tema> obtenerTemas() {
         List<Tema> temas = new ArrayList<>();
-         Document filtro = new Document();
-            filtro.append("estado", "activo");
+        Document filtro = new Document();
+        filtro.append("estado", "activo");
 
         for (Document cur : getColTema().find(filtro)) {
             temas.add(new Tema(cur.getString("ttesis"),
@@ -106,6 +109,33 @@ public class ConexionMongo {
         return tesis;
     }
 
+    
+    public List<Feedback> obtenerFeedback(){
+        List<Feedback> feedback = new ArrayList<>();
+        for (Document cur : getColFeed().find()) {
+            feedback.add(new Feedback(cur.getString("tesis"),
+                    cur.getString("feedback"),
+                    cur.getString("calificacion")
+            
+            ));
+        }
+        return feedback;
+    }
+
+
+
+    public MongoCollection<Document> getColFeed() {
+        return colFeed;
+    }
+
+    public void setColFeed(MongoCollection<Document> colFeed) {
+        this.colFeed = colFeed;
+    }
+
+    
+    
+    
+    
     public MongoDatabase getDb() {
         return db;
     }

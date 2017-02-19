@@ -76,25 +76,28 @@
 
     </table>
 </div>
-    
+
 <div class="area-two">
     <h3>Fechas importantes</h3>
-    
+
 
     <table class="table table-hover">
         <thead>
             <tr>
                 {% if tipo_usuario=='alumno' %}
                 <td>Reunión con Asesor 1 | Lunes 30 | W - 205</td>
-                <td>Reunión con Asesor 2 | Viernes 15 | W - 205</td>
-                <td>Reunión con Asesor 3 | Martes 30 | W - 205</td>
-                <td>Reunión con Asesor 4 | Lunes 15 | W - 205</td>
-                {% else %}
-                <td>Reunión con Juan 1 | Lunes 30 | W - 205</td>
-                <td>Reunión con Juan 2 | Viernes 15 | W - 205</td>
-                <td>Reunión con Ricardo 3 | Martes 30 | W - 205</td>
-                {% endif %}
             </tr>
+            <tr>
+                <td>Reunión con Asesor 2 | Viernes 15 | W - 205</td>
+            </tr>
+
+            {% else %}
+            <tr>
+        <td>Reunión con Juan 1 | Lunes 30 | W - 205</td>
+        <td>Reunión con Juan 2 | Viernes 15 | W - 205</td>
+        <td>Reunión con Ricardo 3 | Martes 30 | W - 205</td>
+        {% endif %}
+        </tr>
         </thead>
 
 

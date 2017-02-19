@@ -130,6 +130,18 @@ public class Main {
             //System.out.println(contrasena);
         }, new Jinja2TemplateEngine());
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         get("/asesoriaTesis", (req, resp) -> {
             map.get("tipo_usuario");
             ConexionMongo gestor = new ConexionMongo();
@@ -139,22 +151,18 @@ public class Main {
         }, new Jinja2TemplateEngine());
         
         
-        
-        
-        
-        
-        
-        
-        
         post("/asesoriaTesis", (req, resp) -> {
             map.get("tipo_usuario");
             ConexionMongo gestor = new ConexionMongo();
             
             map.put("temas", gestor.obtenerTemas());
-            //System.out.println("\n\n\n");
             
             return new ModelAndView(map, "asesoriaTesis.html");
         }, new Jinja2TemplateEngine());
+        
+        
+        
+        
         
         
         

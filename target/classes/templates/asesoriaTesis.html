@@ -6,6 +6,8 @@
 <!-- Contenido del sitio -->
 
 <!-- home section -->
+
+<form method="post" action="asesoriaTesis">
 <div>
     <h3>Temas para asesorar</h3>
 </div>
@@ -22,14 +24,14 @@
 
         {% for tema in temas %}
         <tr>
-            <td>{{tema.ttesis}}</td>
+            <td>{{tema.ttesis}} </td>
             <td>{{tema.escuela}}</td>
             <td>{{tema.etema}}</td>
             <!--<td>{{tema.asesor}}</td>-->
             <td>
                 <div class="radio">
                     <label>
-                        <input name="Aprobar" type="radio"> Acepto
+                        <input name="aprobar" value="acepto" type="radio"> Acepto
                     </label>
                 </div>
             </td>
@@ -38,8 +40,8 @@
 
     </tbody>
 </table>
-
 <button type="submit" class="btn btn-primary">Enviar respuesta</button>
 
+</form>
 <!-- Fin Contenido del sitio -->
 {% endblock contenido %}

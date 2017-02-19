@@ -12,6 +12,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import org.bson.Document;
 import pe.edu.ulima.randitos.bean.Feedback;
@@ -78,22 +80,46 @@ public class ConexionMongo {
 
     }
 
-    public List<Tema> obtenerTemas() {
+    public List<Tema> obtenerTemas(String asesor) {
         List<Tema> temas = new ArrayList<>();
         Document filtro = new Document();
         filtro.append("estado", "activo");
+        filtro.append("asesor", asesor);
 
         for (Document cur : getColTema().find(filtro)) {
             temas.add(new Tema(cur.getString("ttesis"),
                     cur.getString("escuela"),
                     cur.getString("etema"),
-                    cur.getString("asesor")
+                    cur.getString("asesor"),
+                    cur.getString("autor")
             ));
         }
         return temas;
 
     }
 
+    public List<Tema> obtenerTemas() {
+        List<Tema> temas = new ArrayList<>();
+        Document filtro = new Document();
+        filtro.append("estado", "activo");
+        
+        for (Document cur : getColTema().find(filtro)) {
+            temas.add(new Tema(cur.getString("ttesis"),
+                    cur.getString("escuela"),
+                    cur.getString("etema"),
+                    cur.getString("asesor"),
+                    cur.getString("autor")
+            ));
+        }
+        return temas;
+
+    }
+    
+    
+    
+    
+    
+    
     public List<Tesis> obtenerTesis() {
         List<Tesis> tesis = new ArrayList<>();
 
@@ -122,6 +148,20 @@ public class ConexionMongo {
         return feedback;
     }
 
+    
+     public String obtenerFecha(){
+    Calendar cal = new GregorianCalendar();
+            String dia = Integer.toString(cal.get(Calendar.DATE));
+            String mes = Integer.toString(cal.get(Calendar.MONTH));
+            String annio = Integer.toString(cal.get(Calendar.YEAR));
+
+            String fecha = dia+"/" +mes+"/" +annio;
+    return fecha;
+    }
+    
+    
+    
+    
 
 
     public MongoCollection<Document> getColFeed() {

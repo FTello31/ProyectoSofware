@@ -16,17 +16,28 @@ public class Tema {
     private String etema;
     private String asesor;
 
+    private String autor;
+    
     public Tema() {
     }
 
-    
-    
-    public Tema(String ttesis, String escuela, String etema, String asesor) {
+    public Tema(String ttesis, String escuela, String etema, String asesor, String autor) {
         this.ttesis = ttesis;
         this.escuela = escuela;
         this.etema = etema;
         this.asesor = asesor;
+        this.autor = autor;
     }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    
 
     public String getTtesis() {
         return ttesis;

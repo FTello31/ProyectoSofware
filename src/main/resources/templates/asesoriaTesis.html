@@ -27,11 +27,12 @@
             <td>{{tema.ttesis}} </td>
             <td>{{tema.escuela}}</td>
             <td>{{tema.etema}}</td>
+           
             <!--<td>{{tema.asesor}}</td>-->
             <td>
                 <div class="radio">
                     <label>
-                        <input name="aprobar" value="acepto" type="radio"> Acepto
+                        <input name="aprobar" value="{{tema.ttesis}}&{{tema.escuela}}&{{tema.etema}}&{{tema.asesor}}&{{tema.autor}}"  type="radio"> Acepto
                     </label>
                 </div>
             </td>

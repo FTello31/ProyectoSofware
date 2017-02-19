@@ -6,46 +6,40 @@
 <!-- Contenido del sitio -->
 
 <!-- home section -->
-<div id="home">
+<div>
+    <h3>Temas para asesorar</h3>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Título de tesis</th>
+            <th>Especialidad</th>
+            <th>Explicación del tema de tesis</th>
+            <th>¿Deseo asesorar?</th>
+        </tr>
+    </thead>
+    <tbody class="table-hover">
 
-    <div class="container">
-        <div class="row">
-            <div>
-                <h3>Temas para asesorar</h3>
-            </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Título de tesis</th>
-                        <th>Especialidad</th>
-                        <th>Explicación del tema de tesis</th>
-                        <th>¿Deseo asesorar?</th>
-                    </tr>
-                </thead>
-                <tbody class="table-hover">
+        {% for tema in temas %}
+        <tr>
+            <td>{{tema.ttesis}}</td>
+            <td>{{tema.escuela}}</td>
+            <td>{{tema.etema}}</td>
+            <td>{{tema.asesor}}</td>
+            <td>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Acepto
+                    </label>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
 
-                    {% for tema in temas %}
-                    <tr>
-                        <td>{{tema.ttesis}}</td>
-                        <td>{{tema.escuela}}</td>
-                        <td>{{tema.etema}}</td>
-                        <td>{{tema.asesor}}</td>
-                        <td>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Acepto
-                                </label>
-                            </div>
-                        </td>
-                    </tr>
-                    {% endfor %}
+    </tbody>
+</table>
 
-                </tbody>
-            </table>
+<button type="submit" class="btn btn-default">Enviar respuesta</button>
 
-            <button type="submit" class="btn btn-default">Enviar respuesta</button>
-        </div> 
-    </div>
-
-    <!-- Fin Contenido del sitio -->
-    {% endblock contenido %}
+<!-- Fin Contenido del sitio -->
+{% endblock contenido %}

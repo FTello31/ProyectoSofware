@@ -3,49 +3,43 @@
 
 {% block contenido %}
 
-<div id="home">
+<div>
+    <h3>Verificar Actas de Reunion</h3>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Reunion</th>
+            <th>Alumno</th>
+            <th>Fecha</th>
+            <th>Tema de Tesis</th>
+            <th>Cod Salon</th>
+            <th>Observaciones de asesor</th>
+            <th>Observaciones de Alumno</th>
+            <th>Conforme</th>
+        </tr>
+    </thead>
+    <tbody class="table-hover">
+        <tr>
+            <td>Titulo 1</td>
+            <td>Alumno</td>
+            <td>12/02/17</td>
+            <td>Tema</td>
+            <td>P801</td>
+            <td>observacion1</td>
+            <td>observacion2</td>
+            <td>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Acepto
+                    </label>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
-    <div class="container">
-        <div class="row">
-            <div>
-                <h3>Verificar Actas de Reunion</h3>
-            </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Reunion</th>
-                        <th>Alumno</th>
-                        <th>Fecha</th>
-                        <th>Tema de Tesis</th>
-                        <th>Cod Salon</th>
-                        <th>Observaciones de asesor</th>
-                        <th>Observaciones de Alumno</th>
-                        <th>Conforme</th>
-                    </tr>
-                </thead>
-                <tbody class="table-hover">
-                    <tr>
-                        <td>Titulo 1</td>
-                        <td>Alumno</td>
-                        <td>12/02/17</td>
-                        <td>Tema</td>
-                        <td>P801</td>
-                        <td>observacion1</td>
-                        <td>observacion2</td>
-                        <td>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Acepto
-                                </label>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+<button type="submit" class="btn btn-default">Enviar respuesta</button>
 
-            <button type="submit" class="btn btn-default">Enviar respuesta</button>
-        </div> 
-    </div>
-
-    <!-- Fin Contenido del sitio -->
-    {% endblock contenido %}
+<!-- Fin Contenido del sitio -->
+{% endblock contenido %}

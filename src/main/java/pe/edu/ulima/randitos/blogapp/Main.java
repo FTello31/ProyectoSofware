@@ -5,25 +5,10 @@
  */
 package pe.edu.ulima.randitos.blogapp;
 
-import com.google.gson.Gson;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import org.bson.Document;
-import pe.edu.ulima.randitos.bean.Reunion;
-import pe.edu.ulima.randitos.bean.Tema;
-import pe.edu.ulima.randitos.bean.Tesis;
-import pe.edu.ulima.randitos.bean.Usuario;
+
 import spark.ModelAndView;
 import static spark.Spark.get;
 import static spark.Spark.port;

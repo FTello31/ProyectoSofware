@@ -77,8 +77,10 @@ public class ConexionMongo {
 
     public List<Tema> obtenerTemas() {
         List<Tema> temas = new ArrayList<>();
+         Document filtro = new Document();
+            filtro.append("estado", "activo");
 
-        for (Document cur : getColTema().find()) {
+        for (Document cur : getColTema().find(filtro)) {
             temas.add(new Tema(cur.getString("ttesis"),
                     cur.getString("escuela"),
                     cur.getString("etema"),

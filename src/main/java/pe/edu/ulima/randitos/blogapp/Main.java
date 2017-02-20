@@ -51,13 +51,15 @@ public class Main {
             filtro.append("usuario", usuario);
             filtro.append("password", password);
 
-            Document myDoc = gestor.getCollection().find(filtro).first();
+            Document myDoc = gestor.getColUsu().find(filtro).first();
             map.put("tipo_usuario", myDoc.getString("tipo"));
             map.put("nombre", myDoc.getString("nombre"));
-            map.put("correo", myDoc.getString("correo"));
             map.put("celular", myDoc.getString("celular"));
             map.put("usuario", myDoc.getString("usuario"));
-            
+            map.put("asesor", myDoc.getString("asesor"));
+            map.put("ttesis", myDoc.getString("ttesis"));
+            map.put("asesorado", myDoc.getString("asesorado"));
+            map.put("disponibilidad", myDoc.getString("disponibilidad"));
             
             map.put("reunion", gestor.obtenerReuniones());
 
@@ -160,22 +162,32 @@ public class Main {
             
 
             Document myDoc = new Document();
-            myDoc.append("titulo", ttesis);
+            myDoc.append("ttesis", ttesis);
             myDoc.append("autor", autor);
             myDoc.append("fecha",gestor.obtenerFecha());
             myDoc.append("facultad", escuela);
             myDoc.append("etema", etema);
             myDoc.append("asesor", asesor);
             
+            gestor.getColtesis().insertOne(myDoc);
             
             Document filtro = new Document();
             filtro.append("ttesis", ttesis);
-           
-            
-            gestor.getColtesis().insertOne(myDoc);
             gestor.getColTema().updateOne(filtro,new Document("$set", new Document("estado", "desactivado")));
-
-
+            
+            Document filtro2 = new Document();
+            filtro2.append("nombre", autor);
+            gestor.getColUsu().updateOne(filtro2,new Document("$set", new Document("asesor", asesor)));
+            
+            Document filtro3 = new Document();
+            filtro3.append("usuario", asesor);
+            
+            Document doc = new Document();
+            doc.append("asesorado", autor);
+            doc.append("ttesis", ttesis);
+            
+            gestor.getColUsu().updateOne(filtro3,new Document("$set",doc));
+            
             return new ModelAndView(map, "asesoriaTesis.html");
         }, new Jinja2TemplateEngine());
 

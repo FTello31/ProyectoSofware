@@ -47,11 +47,11 @@
             {% if tipo_usuario=='alumno' %}
             <tr>
                 <th>Nombre:</th>
-                <td>{{nombre}}</td>
+                <td>{{asesor}}</td>
             </tr>
             <tr>
                 <th>Disponibilidad:</th>
-                <td>Lunes | 10am - 11am | V - 102</td>
+                <td>{{disponibilidad}}</td>
             </tr>
             <tr>
                 <th>Correo</th>
@@ -64,11 +64,11 @@
             {% else %}
             <tr>
                 <th>Nombre:</th>
-                <td>{{nombre}}</td>
+                <td>{{asesorado}}</td>
             </tr>
             <tr>
                 <th>Tema tesis:</th>
-                <td>Realizar App agropecuaria</td>
+                <td>{{ttesis}}</td>
             </tr>
 
             {% endif %}

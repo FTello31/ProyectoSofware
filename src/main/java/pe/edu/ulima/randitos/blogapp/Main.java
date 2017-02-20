@@ -135,10 +135,6 @@ public class Main {
         
         
         
-        
-        
-        
-        
         get("/asesoriaTesis", (req, resp) -> {
             map.get("tipo_usuario");
             ConexionMongo gestor = new ConexionMongo();
@@ -172,7 +168,12 @@ public class Main {
             myDoc.append("asesor", asesor);
             
             
+            Document filtro = new Document();
+            filtro.append("ttesis", ttesis);
+           
+            
             gestor.getColtesis().insertOne(myDoc);
+            gestor.getColTema().updateOne(filtro,new Document("$set", new Document("estado", "desactivado")));
 
 
             return new ModelAndView(map, "asesoriaTesis.html");

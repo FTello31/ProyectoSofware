@@ -38,8 +38,10 @@ public class ConexionMongo {
     private MongoCollection<Document> colFeed;
 
     public ConexionMongo() {
-        mClient = new MongoClient(new MongoClientURI("mongodb://pepe:pepe@ds147979.mlab.com:47979/tesisuldb"));
-        db = mClient.getDatabase("tesisuldb");
+        mClient = new MongoClient(new MongoClientURI("mongodb://pepe:pepe@ds157479.mlab.com:57479/ulpruebaaaa"));
+        
+        //gestor.obtenerTemas
+        db = mClient.getDatabase("ulpruebaaaa");
 
         collection = db.getCollection("usuario");
         colTema = db.getCollection("tema");

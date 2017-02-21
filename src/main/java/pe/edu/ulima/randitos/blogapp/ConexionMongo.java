@@ -68,11 +68,16 @@ public class ConexionMongo {
     }
     
      */
-    public List<Reunion> obtenerReuniones() {
-        List<Reunion> reunion = new ArrayList<>();
 
-        for (Document cur : getColReunion().find()) {
-            reunion.add(new Reunion(cur.getString("reunion"),
+    public List<Reunion> obtenerActas() {
+        List<Reunion> reunion = new ArrayList<>();
+        Document filtro = new Document();
+        filtro.append("estado", "desactivado");
+        
+        for (Document cur : getColReunion().find(filtro)) {
+            reunion.add(new Reunion(cur.getString("nombre"),
+                    cur.getString("ttesis"),
+                    cur.getString("reunion"),
                     cur.getString("obAsesor"),
                     cur.getString("obAlumno"),
                     cur.getString("estado")
@@ -81,7 +86,42 @@ public class ConexionMongo {
         return reunion;
 
     }
+    
+    
+    
+    public List<Reunion> obtenerReuniones() {
+        List<Reunion> reunion = new ArrayList<>();
+        Document filtro = new Document();
+        filtro.append("estado", "activo");
+        
+        for (Document cur : getColReunion().find(filtro)) {
+            reunion.add(new Reunion(cur.getString("nombre"),
+                    cur.getString("ttesis"),
+                    cur.getString("reunion"),
+                    cur.getString("obAsesor"),
+                    cur.getString("obAlumno"),
+                    cur.getString("estado")
+            ));
+        }
+        return reunion;
 
+    }
+    
+    public List<Tema> obtenerTemas() {
+        List<Tema> temas = new ArrayList<>();
+        Document filtro = new Document();
+        filtro.append("estado", "activo");
+
+        for (Document cur : getColTema().find(filtro)) {
+            temas.add(new Tema(cur.getString("ttesis"),
+                    cur.getString("escuela"),
+                    cur.getString("etema"),
+                    cur.getString("asesor"),
+                    cur.getString("autor")
+            ));
+        }
+        return temas;
+    }
     public List<Tema> obtenerTemas(String asesor) {
         List<Tema> temas = new ArrayList<>();
         Document filtro = new Document();
@@ -99,24 +139,7 @@ public class ConexionMongo {
         return temas;
 
     }
-
-    public List<Tema> obtenerTemas() {
-        List<Tema> temas = new ArrayList<>();
-        Document filtro = new Document();
-        filtro.append("estado", "activo");
-
-        for (Document cur : getColTema().find(filtro)) {
-            temas.add(new Tema(cur.getString("ttesis"),
-                    cur.getString("escuela"),
-                    cur.getString("etema"),
-                    cur.getString("asesor"),
-                    cur.getString("autor")
-            ));
-        }
-        return temas;
-
-    }
-
+    
     public List<Tesis> obtenerTesis() {
         List<Tesis> tesis = new ArrayList<>();
 

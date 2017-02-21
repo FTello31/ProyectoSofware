@@ -3,39 +3,32 @@
 
 {% block contenido %}
 
-<div>
-    <h3>Verificar Actas de Reunion</h3>
-</div>
+
 <table class="table table-hover">
     <thead>
         <tr class="success">
-            <th>Reunion</th>
             <th>Alumno</th>
+            <th>Reunion</th>
             <th>Fecha</th>
             <th>Tema de Tesis</th>
-            <th>Cod Salon</th>
-            <th>Observaciones de asesor</th>
+            <th>Observaciones de Asesor</th>
             <th>Observaciones de Alumno</th>
-            <th>Conforme</th>
+            <!--<th>Conforme</th>-->
         </tr>
     </thead>
     <tbody class="table-hover">
+        {% for a in actas %}
         <tr>
-            <td>Titulo 1</td>
-            <td>Alumno</td>
-            <td>12/02/17</td>
-            <td>Tema</td>
-            <td>P801</td>
-            <td>observacion1</td>
-            <td>observacion2</td>
-            <td>
-                <div class="radio">
-                    <label>
-                        <input name="Aprobar" type="radio"> Acepto
-                    </label>
-                </div>
-            </td>
+            <td>{{a.autor}}</td>
+            <td>{{a.reunion}}</td>
+            <td>{{a.fecha}}</td>
+            <td>{{a.ttesis}}</td>
+            <td>{{a.obAsesor}}</td>
+            <td>{{a.obAlumno}}</td>
+        
+            <!--<td><div class="radio"><label> <input name="Aprobar" type="radio"> Acepto</label> </div> </td> -->
         </tr>
+        {% endfor %}
     </tbody>
 </table>
 

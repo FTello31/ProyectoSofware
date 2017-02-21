@@ -6,12 +6,15 @@
 <!-- Contenido del sitio -->
 
 <!-- home section -->
+<form method="post" action="registroReunionProfe">
 <div>
     <h3>Reuniones por Firmar</h3>
 </div>
 <table class="table table-hover">
     <thead>
         <tr class="success">
+            <th>Autor</th>
+            <th>Titulo de tesis</th>
             <th>Nombre de la reunión</th>
             <th>Observaciones del Asesor</th>
             <th>Observaciones del Alumno</th>
@@ -22,13 +25,16 @@
 
         {% for reunion in reuniones %}
         <tr>
+            <td>{{reunion.autor}}</td>
+            <td>{{reunion.ttesis}}</td>
             <td>{{reunion.reunion}}</td>
-            <td><input type="text" class="form-control" id="obAsesor" placeholder="Observaciones" name="obAsesor"></td>
+            <td><input type="text" class="form-control" 
+                       id="obAsesor" placeholder="Observaciones" name="obAsesor"></td>
             <td>{{reunion.obAlumno}}</td>
             <td>
                 <div class="radio">
                     <label>
-                        <input name="Aprobar" type="radio"> De acuerdo
+                        <input name="firmar" value="{{reunion.autor}}&{{reunion.ttesis}}&{{reunion.reunion}}&{{reunion.obAlumno}}" type="radio"> De acuerdo
                     </label>
                 </div>
             </td>
@@ -41,7 +47,7 @@
 <button type="submit" class="btn btn-primary" onclick="alert('¡Estas enviando esta respuesta!')">
     Enviar respuesta
 </button>
-
+</form>
 
 <!-- Fin Contenido del sitio -->
 {% endblock contenido %}

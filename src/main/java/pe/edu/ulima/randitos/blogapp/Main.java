@@ -41,7 +41,6 @@ public class Main {
         }, new Jinja2TemplateEngine());
 
         post("/main", (req, resp) -> {
-            //jala del login.html metodo post action listar_post
             ConexionMongo gestor = new ConexionMongo();
 
             String usuario = req.queryParams("usuario");
@@ -54,13 +53,19 @@ public class Main {
             Document myDoc = gestor.getColUsu().find(filtro).first();
             map.put("tipo_usuario", myDoc.getString("tipo"));
             map.put("nombre", myDoc.getString("nombre"));
-            map.put("celular", myDoc.getString("celular"));
             map.put("usuario", myDoc.getString("usuario"));
-            map.put("asesor", myDoc.getString("asesor"));
-            map.put("ttesis", myDoc.getString("ttesis"));
             map.put("asesorado", myDoc.getString("asesorado"));
-            map.put("disponibilidad", myDoc.getString("disponibilidad"));
-            
+            map.put("ttesis", myDoc.getString("ttesis"));
+
+            if (myDoc.getString("tipo").equalsIgnoreCase("alumno")) {
+                Document doc = gestor.getColUsu().find(new Document("usuario", myDoc.getString("asesor"))).first();
+                map.put("nombreAse", doc.getString("nombre"));
+                map.put("celular", doc.getString("celular"));
+                map.put("disponibilidad", doc.getString("disponibilidad"));
+                map.put("correo", doc.getString("correo"));
+
+            }
+
             map.put("reunion", gestor.obtenerReuniones());
 
             if (myDoc == null) {
@@ -79,15 +84,13 @@ public class Main {
         post("/registrarTema", (req, resp) -> {
 
             map.get("tipo_usuario");
-
-            //jala del login.html metodo post action listar_post
             ConexionMongo gestor = new ConexionMongo();
 
             String ttesis = req.queryParams("ttesis");
             String escuela = req.queryParams("escuela");
             String etema = req.queryParams("etema");
             String asesor = req.queryParams("asesor");
-            String autor = (String)map.get("nombre");
+            String autor = (String) map.get("nombre");
 
             Document myDoc = new Document();
             myDoc.append("ttesis", ttesis);
@@ -95,14 +98,67 @@ public class Main {
             myDoc.append("etema", etema);
             myDoc.append("asesor", asesor);
             myDoc.append("estado", "activo");
-            myDoc.append("autor",autor);
-            
+            myDoc.append("autor", autor);
+
             gestor.getColTema().insertOne(myDoc);
 
             return new ModelAndView(map, "buscarAsesor.html");
 
-            //System.out.println(usuario);
-            //System.out.println(contrasena);
+        }, new Jinja2TemplateEngine());
+
+        get("/asesoriaTesis", (req, resp) -> {
+            map.get("tipo_usuario");
+            ConexionMongo gestor = new ConexionMongo();
+            map.put("temas", gestor.obtenerTemas((String) map.get("usuario")));
+
+            return new ModelAndView(map, "asesoriaTesis.html");
+        }, new Jinja2TemplateEngine());
+
+        post("/asesoriaTesis", (req, resp) -> {
+            map.get("tipo_usuario");
+            ConexionMongo gestor = new ConexionMongo();
+            map.put("temas", gestor.obtenerTemas((String) map.get("usuario")));
+
+            String aprobar = req.queryParams("aprobar");
+            String[] cadena = aprobar.split("&");
+            String ttesis = cadena[0];
+            String escuela = cadena[1];
+            String etema = cadena[2];
+            String asesor = cadena[3];
+            String autor = cadena[4];
+
+            Document myDoc = new Document();
+            myDoc.append("ttesis", ttesis);
+            myDoc.append("autor", autor);
+            myDoc.append("fecha", gestor.obtenerFecha());
+            myDoc.append("facultad", escuela);
+            myDoc.append("etema", etema);
+            myDoc.append("asesor", asesor);
+
+            gestor.getColtesis().insertOne(myDoc);
+
+            Document filtro = new Document();
+            filtro.append("ttesis", ttesis);
+            gestor.getColTema().updateOne(filtro, new Document("$set", new Document("estado", "desactivado")));
+
+            Document filtro2 = new Document();
+            filtro2.append("nombre", autor);
+
+            Document doc1 = new Document();
+            doc1.append("asesor", asesor);
+            doc1.append("ttesis", ttesis);
+
+            gestor.getColUsu().updateOne(filtro2, new Document("$set", doc1));
+
+            Document filtro3 = new Document();
+            filtro3.append("usuario", asesor);
+
+            Document doc = new Document();
+            doc.append("asesorado", autor);
+
+            gestor.getColUsu().updateOne(filtro3, new Document("$set", doc));
+
+            return new ModelAndView(map, "asesoriaTesis.html");
         }, new Jinja2TemplateEngine());
 
         get("/registrarReunion", (req, resp) -> {
@@ -111,19 +167,16 @@ public class Main {
         }, new Jinja2TemplateEngine());
 
         post("/registrarReunion", (req, resp) -> {
-
             map.get("tipo_usuario");
-            
-            //jala del login.html metodo post action listar_post
             ConexionMongo gestor = new ConexionMongo();
 
             String reunion = req.queryParams("reunion");
-            String obAsesor = req.queryParams("obAsesor");
             String obAlumno = req.queryParams("obAlumno");
 
             Document myDoc = new Document();
+            myDoc.append("nombre", map.get("nombre"));
+            myDoc.append("ttesis", map.get("ttesis"));
             myDoc.append("reunion", reunion);
-            myDoc.append("obAsesor", obAsesor);
             myDoc.append("obAlumno", obAlumno);
             myDoc.append("estado", "activo");
 
@@ -132,85 +185,57 @@ public class Main {
             return new ModelAndView(map, "registrarReunion.html");
         }, new Jinja2TemplateEngine());
 
-        
-        
-        
-        
-        get("/asesoriaTesis", (req, resp) -> {
-            map.get("tipo_usuario");
-            ConexionMongo gestor = new ConexionMongo();
-            map.put("temas", gestor.obtenerTemas((String)map.get("usuario")));
-            //System.out.println("\n\n\n");
-            return new ModelAndView(map, "asesoriaTesis.html");
-        }, new Jinja2TemplateEngine());
-
-        post("/asesoriaTesis", (req, resp) -> {
-            map.get("tipo_usuario");
-            ConexionMongo gestor = new ConexionMongo();
-
-             map.put("temas", gestor.obtenerTemas((String)map.get("usuario")));
-
-            String aprobar = req.queryParams("aprobar");
-            String[] cadena = aprobar.split("&");
-
-            String ttesis = cadena[0];
-            String escuela = cadena[1];
-            String etema = cadena[2];
-            String asesor = cadena[3];
-            String autor = cadena[4];
-            
-
-            Document myDoc = new Document();
-            myDoc.append("ttesis", ttesis);
-            myDoc.append("autor", autor);
-            myDoc.append("fecha",gestor.obtenerFecha());
-            myDoc.append("facultad", escuela);
-            myDoc.append("etema", etema);
-            myDoc.append("asesor", asesor);
-            
-            gestor.getColtesis().insertOne(myDoc);
-            
-            Document filtro = new Document();
-            filtro.append("ttesis", ttesis);
-            gestor.getColTema().updateOne(filtro,new Document("$set", new Document("estado", "desactivado")));
-            
-            Document filtro2 = new Document();
-            filtro2.append("nombre", autor);
-            gestor.getColUsu().updateOne(filtro2,new Document("$set", new Document("asesor", asesor)));
-            
-            Document filtro3 = new Document();
-            filtro3.append("usuario", asesor);
-            
-            Document doc = new Document();
-            doc.append("asesorado", autor);
-            doc.append("ttesis", ttesis);
-            
-            gestor.getColUsu().updateOne(filtro3,new Document("$set",doc));
-            
-            return new ModelAndView(map, "asesoriaTesis.html");
-        }, new Jinja2TemplateEngine());
-
-        
-      
-        
         get("/registroReunionProfe", (req, resp) -> {
             map.get("tipo_usuario");
             ConexionMongo gestor = new ConexionMongo();
             map.put("reuniones", gestor.obtenerReuniones());
-            //System.out.println("\n\n\n");
+
+            return new ModelAndView(map, "registroReunionProfe.html");
+        }, new Jinja2TemplateEngine());
+
+        post("/registroReunionProfe", (req, resp) -> {
+            map.get("tipo_usuario");
+            ConexionMongo gestor = new ConexionMongo();
+            map.put("reuniones", gestor.obtenerReuniones());
+            
+            String obAsesor = req.queryParams("obAsesor");
+            String firmar = req.queryParams("firmar");
+
+            String[] cadena = firmar.split("&");
+            String autor = cadena[0];
+            String ttesis = cadena[1];
+            String reunion = cadena[2];
+            String obAlumno = cadena[3];
+
+            Document filtro = new Document();
+            filtro.append("nombre", autor);
+            filtro.append("ttesis", ttesis);
+            filtro.append("reunion", reunion);
+
+            Document myDoc = new Document();
+            myDoc.append("obAsesor", obAsesor);
+            myDoc.append("fecha", gestor.obtenerFecha());
+            myDoc.append("estado", "desactivado");
+            
+            
+            gestor.getColReunion().updateOne(filtro, new Document("$set", myDoc));
+
             return new ModelAndView(map, "registroReunionProfe.html");
         }, new Jinja2TemplateEngine());
 
         get("/verificarActasReunion", (req, resp) -> {
             map.get("tipo_usuario");
+            ConexionMongo gestor = new ConexionMongo();
+            map.put("actas", gestor.obtenerActas());
+
             return new ModelAndView(map, "verificarActasReunion.html");
         }, new Jinja2TemplateEngine());
 
         get("/feedbackProfe", (req, resp) -> {
             map.get("tipo_usuario");
             ConexionMongo gestor = new ConexionMongo();
-            map.put("tesis", gestor.obtenerTesis((String)map.get("usuario")));
-            
+            map.put("tesis", gestor.obtenerTesis((String) map.get("usuario")));
+
             return new ModelAndView(map, "feedbackProfe.html");
         }, new Jinja2TemplateEngine());
 

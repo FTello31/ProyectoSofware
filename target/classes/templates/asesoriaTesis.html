@@ -13,7 +13,7 @@
 </div>
 <table class="table table-hover">
     <thead>
-        <tr>
+        <tr class="success">
             <th>Título de tesis</th>
             <th>Especialidad</th>
             <th>Explicación del tema de tesis</th>
@@ -24,7 +24,7 @@
 
         {% for tema in temas %}
         <tr>
-            <td>{{tema.ttesis}} </td>
+            <td>{{tema.ttesis}}</td>
             <td>{{tema.escuela}}</td>
             <td>{{tema.etema}}</td>
            
@@ -41,7 +41,8 @@
 
     </tbody>
 </table>
-<button type="submit" class="btn btn-primary">Enviar respuesta</button>
+    
+<button type="submit" class="btn btn-primary" onclick="alert('¡Estas aceptando asesorar')" >Enviar respuesta</button>
 
 </form>
 <!-- Fin Contenido del sitio -->

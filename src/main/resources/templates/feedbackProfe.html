@@ -3,38 +3,41 @@
 
 
 {% block contenido %}
-<div class="container">
-    <div class="row">
-        <form class="login" method="post" action="feedbackCalificacion">
-            <div class="form-group">
-                <label for="reunion">Seleccionar Tesis</label>
-                <select class="form-control" id="reunion" name="reunion">
-                    <option value="Reunión con asesor #1">Tesis #1</option>
-                    <option value="Reunión con asesor #2">Tesis #2</option>
-                    <option value="Reunión con asesor #3">Tesis #3</option>
-                    <option value="Reunión con asesor #4">Tesis #4</option>
-                </select>
-            </div>  
-            <div class="form-group">
-                <label for="observacion">Feedback al Alumno</label>
-                <input type="text" class="form-control" id="ob_asesor" 
-                       placeholder="Observaciones del Asesor" name="ob_asesor">
-            </div>
 
-            <div class="ec-stars-wrapper">
+<form method="post" action="feedbackCalificacion" class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-xs-2">Seleccionar Tesis</label>
+        <div class="col-xs-10">
+            <select class="form-control" id="reunion" name="reunion">
+                {% for t in tesis %}
+                <option value="tesis">{{t.ttesis}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>  
+    <div class="form-group">
+        <label class="control-label col-xs-2">Feedback al Alumno</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="ob_asesor" 
+                   placeholder="Observaciones del Asesor" name="ob_asesor">
+        </div>
+    </div>
 
-                <label for="exampleInputFile">Calificar segun criterio</label>
+    <div class="ec-stars-wrapper">
 
-                <a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-                <a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-                <a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-                <a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-                <a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
-            </div>
+        <label class="control-label col-xs-2">Calificar segun criterio</label>
+        <div class="col-xs-10">
+            <a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
+            <a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
+            <a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
+            <a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
+            <a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
 
-            <button type="submit" class="btn btn-default">Enviar feedback</button>
-        </form>
+        </div>
+    </div>
+    <div class="col-xs-offset-2 col-xs-10" >
+        <button type="submit" class="btn btn-primary" onclick="alert('¡Estas Enviando Feedback!')">Enviar feedback</button>
+    </div>
+</form>
 
-    </div> 
-</div>
 {% endblock contenido %}

@@ -11,7 +11,7 @@
 </div>
 <table class="table table-hover">
     <thead>
-        <tr>
+        <tr class="success">
             <th>Nombre de la reunión</th>
             <th>Observaciones del Asesor</th>
             <th>Observaciones del Alumno</th>
@@ -23,13 +23,12 @@
         {% for reunion in reuniones %}
         <tr>
             <td>{{reunion.reunion}}</td>
-            <td>{{reunion.obAsesor}}</td>
+            <td><input type="text" class="form-control" id="obAsesor" placeholder="Observaciones" name="obAsesor"></td>
             <td>{{reunion.obAlumno}}</td>
-
             <td>
                 <div class="radio">
                     <label>
-                        <input name="Aprobar" type="radio"> Acepto
+                        <input name="Aprobar" type="radio"> De acuerdo
                     </label>
                 </div>
             </td>
@@ -39,7 +38,9 @@
     </tbody>
 </table>
 
-<button type="submit" class="btn btn-primary">Enviar respuesta</button>
+<button type="submit" class="btn btn-primary" onclick="alert('¡Estas enviando esta respuesta!')">
+    Enviar respuesta
+</button>
 
 
 <!-- Fin Contenido del sitio -->

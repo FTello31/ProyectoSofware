@@ -1,53 +1,7 @@
 {% extends templates/base.html %}
 
 {% block contenido %}
-<div class="container">
-    <div class="row">
 
-        <!-- 
-        <form class="login" method="post" action="repositorioTesis">
-
-            <div class="form-group">
-                <label for="exampleInputFile">Titulo</label>
-                <input id="titulo" class="form-control" placeholder="Titulo" name="titulo tema">
-            </div>
-
-
-            <div class="form-group">
-                <label for="facultad">Facultad</label>
-                <select class="form-control" id="facultad" name="facultad">
-                    <option value="Facultad #1">Arquitectura</option>
-                    <option value="Facultad #2">Ing Sistemas</option>
-                    <option value="Facultad #3">Ing Civil</option>
-                    <option value="Facultad #3">Ing Industrial</option>
-
-                </select>
-            </div> 
-
-            <div class="form-group">
-                <label for="estado">Estado</label>
-                <select class="form-control" id="estado" name="estado">
-                    <option value="Estado #1">conclusion</option>
-                    <option value="Estado #2">por continuar</option>
-                    <option value="Estado #3">inconcluso</option>
-                </select>
-            </div>  
-
-            <div class="form-group">
-                <label for="exampleInputFile">Autor(es)</label>
-                <input id="autor" class="form-control" placeholder="autor" name="autor tema">
-            </div>
-
-
-            <div class="form-group">
-                <label for="exampleInputFile">Fecha</label>
-                <input id="fecha" class="form-control" placeholder="fecha" name="fecha tema">
-            </div>
-
-            <button type="submit" class="btn btn-default">Buscar</button>
-
-        </form>
-      Fin Contenido del sitio -->
         <table class="table table-hover">
             <thead>
                 <tr class="success"> 
@@ -61,7 +15,6 @@
                 </tr>
             </thead>
             <tbody class="table-hover">
-              
                     {% for tesis in tesis %}
                 <tr>
                     <td>{{tesis.titulo}}</td>
@@ -78,7 +31,4 @@
             </tbody>
         </table>
 
-
-    </div> 
-</div>
 {% endblock contenido %}

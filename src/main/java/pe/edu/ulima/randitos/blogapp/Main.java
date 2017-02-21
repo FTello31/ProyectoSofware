@@ -73,7 +73,7 @@ public class Main {
 
         get("/buscarAsesor", (req, resp) -> {
             map.get("tipo_usuario");
-            return new ModelAndView(map, "registrarTema.html");
+            return new ModelAndView(map, "buscarAsesor.html");
         }, new Jinja2TemplateEngine());
 
         post("/registrarTema", (req, resp) -> {
@@ -96,11 +96,10 @@ public class Main {
             myDoc.append("asesor", asesor);
             myDoc.append("estado", "activo");
             myDoc.append("autor",autor);
- 
- 
+            
             gestor.getColTema().insertOne(myDoc);
 
-            return new ModelAndView(map, "registrarTema.html");
+            return new ModelAndView(map, "buscarAsesor.html");
 
             //System.out.println(usuario);
             //System.out.println(contrasena);
@@ -209,6 +208,9 @@ public class Main {
 
         get("/feedbackProfe", (req, resp) -> {
             map.get("tipo_usuario");
+            ConexionMongo gestor = new ConexionMongo();
+            map.put("tesis", gestor.obtenerTesis((String)map.get("usuario")));
+            
             return new ModelAndView(map, "feedbackProfe.html");
         }, new Jinja2TemplateEngine());
 

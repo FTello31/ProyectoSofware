@@ -11,15 +11,15 @@ package pe.edu.ulima.randitos.bean;
  */
 public class Tesis {
 
-    private String titulo;
+    private String ttesis;
     private String autor;
     private String fecha;
     private String facultad;
     private String estado;
     private String archivo;
 
-    public Tesis(String titulo, String autor, String fecha, String facultad, String estado, String archivo) {
-        this.titulo = titulo;
+    public Tesis(String ttesis, String autor, String fecha, String facultad, String estado, String archivo) {
+        this.ttesis = ttesis;
         this.autor = autor;
         this.fecha = fecha;
         this.facultad = facultad;
@@ -27,13 +27,15 @@ public class Tesis {
         this.archivo = archivo;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTtesis() {
+        return ttesis;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTtesis(String ttesis) {
+        this.ttesis = ttesis;
     }
+
+    
 
     public String getAutor() {
         return autor;

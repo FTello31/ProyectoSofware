@@ -121,7 +121,7 @@ public class ConexionMongo {
         List<Tesis> tesis = new ArrayList<>();
 
         for (Document cur : getColtesis().find()) {
-            tesis.add(new Tesis(cur.getString("titulo"),
+            tesis.add(new Tesis(cur.getString("ttesis"),
                     cur.getString("autor"),
                     cur.getString("fecha"),
                     cur.getString("facultad"),
@@ -132,6 +132,29 @@ public class ConexionMongo {
         return tesis;
     }
 
+    public List<Tesis> obtenerTesis(String asesor) {
+        List<Tesis> tesis = new ArrayList<>();
+        
+        Document filtro = new Document();
+        filtro.append("asesor", asesor);
+
+        for (Document cur : getColtesis().find()) {
+            tesis.add(new Tesis(cur.getString("ttesis"),
+                    cur.getString("autor"),
+                    cur.getString("fecha"),
+                    cur.getString("facultad"),
+                    cur.getString("estado"),
+                    cur.getString("archivo")
+            ));
+        }
+        return tesis;
+
+    }
+    
+    
+    
+    
+    
     public List<Feedback> obtenerFeedback() {
         List<Feedback> feedback = new ArrayList<>();
         for (Document cur : getColFeed().find()) {

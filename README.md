@@ -1,7 +1,7 @@
 # is2-2017-0
 Proyecto de software
 
-*********Proyecto Software 2 - Login ***********
+ *********Proyecto Software 2 - Login ***********
 
 Para ver la funcionalidad de la web se deben 
 seguir los siguientes pasos:

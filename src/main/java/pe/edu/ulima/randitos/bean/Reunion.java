@@ -11,39 +11,34 @@ package pe.edu.ulima.randitos.bean;
  */
 public class Reunion {
 
+    
+    private String reunion;
+    private String obAlumno;
+    private String obAsesor;
+    private String estado;
     private String autor;
     private String ttesis;
-    private String reunion;
-    private String obAsesor;
-    private String obAlumno;
-    private String estado;
+    private String fecha;
 
-    public Reunion(String autor, String ttesis, String reunion, String obAsesor, String obAlumno, String estado) {
-        this.autor = autor;
-        this.ttesis = ttesis;
+    public Reunion(String reunion, String obAlumno, String obAsesor, String estado, String autor, String ttesis, String fecha) {
         this.reunion = reunion;
-        this.obAsesor = obAsesor;
         this.obAlumno = obAlumno;
+        this.obAsesor = obAsesor;
         this.estado = estado;
-    }
-
- 
-    public String getTtesis() {
-        return ttesis;
-    }
-
-    public void setTtesis(String ttesis) {
-        this.ttesis = ttesis;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
         this.autor = autor;
+        this.ttesis = ttesis;
+        this.fecha = fecha;
     }
 
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+   
 
     public String getReunion() {
         return reunion;
@@ -51,14 +46,6 @@ public class Reunion {
 
     public void setReunion(String reunion) {
         this.reunion = reunion;
-    }
-
-    public String getObAsesor() {
-        return obAsesor;
-    }
-
-    public void setObAsesor(String obAsesor) {
-        this.obAsesor = obAsesor;
     }
 
     public String getObAlumno() {
@@ -69,6 +56,14 @@ public class Reunion {
         this.obAlumno = obAlumno;
     }
 
+    public String getObAsesor() {
+        return obAsesor;
+    }
+
+    public void setObAsesor(String obAsesor) {
+        this.obAsesor = obAsesor;
+    }
+
     public String getEstado() {
         return estado;
     }
@@ -77,4 +72,24 @@ public class Reunion {
         this.estado = estado;
     }
 
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getTtesis() {
+        return ttesis;
+    }
+
+    public void setTtesis(String ttesis) {
+        this.ttesis = ttesis;
+    }
+    
+    
+    
+    
+    
 }

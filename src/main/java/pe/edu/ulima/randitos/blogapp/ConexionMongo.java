@@ -75,19 +75,18 @@ public class ConexionMongo {
         filtro.append("estado", "desactivado");
         
         for (Document cur : getColReunion().find(filtro)) {
-            reunion.add(new Reunion(cur.getString("nombre"),
-                    cur.getString("ttesis"),
-                    cur.getString("reunion"),
-                    cur.getString("obAsesor"),
+            reunion.add(new Reunion(cur.getString("reunion"),
                     cur.getString("obAlumno"),
-                    cur.getString("estado")
+                    cur.getString("obAsesor"),
+                    cur.getString("estado"),
+                    cur.getString("autor"),
+                    cur.getString("ttesis"),
+                    cur.getString("fecha")
             ));
         }
         return reunion;
 
     }
-    
-    
     
     public List<Reunion> obtenerReuniones() {
         List<Reunion> reunion = new ArrayList<>();
@@ -95,12 +94,13 @@ public class ConexionMongo {
         filtro.append("estado", "activo");
         
         for (Document cur : getColReunion().find(filtro)) {
-            reunion.add(new Reunion(cur.getString("nombre"),
-                    cur.getString("ttesis"),
-                    cur.getString("reunion"),
-                    cur.getString("obAsesor"),
+            reunion.add(new Reunion(cur.getString("reunion"),
                     cur.getString("obAlumno"),
-                    cur.getString("estado")
+                    cur.getString("obAsesor"),
+                    cur.getString("estado"),
+                    cur.getString("autor"),
+                    cur.getString("ttesis"),
+                    cur.getString("fecha")
             ));
         }
         return reunion;

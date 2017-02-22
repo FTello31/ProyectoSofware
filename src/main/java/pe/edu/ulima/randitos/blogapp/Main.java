@@ -50,20 +50,28 @@ public class Main {
             filtro.append("usuario", usuario);
             filtro.append("password", password);
 
+            //saca el usuario que entro puede ser alumno , profe
             Document myDoc = gestor.getColUsu().find(filtro).first();
             map.put("tipo_usuario", myDoc.getString("tipo"));
             map.put("nombre", myDoc.getString("nombre"));
             map.put("usuario", myDoc.getString("usuario"));
             map.put("asesorado", myDoc.getString("asesorado"));
-            map.put("ttesis", myDoc.getString("ttesis"));
-
+            
+            //si es alumno 
             if (myDoc.getString("tipo").equalsIgnoreCase("alumno")) {
-                Document doc = gestor.getColUsu().find(new Document("usuario", myDoc.getString("asesor"))).first();
+                Document doc = 
+                        gestor.getColUsu().find(new Document("usuario", myDoc.getString("asesor"))).first();
+                //buscamos los datos del profe
                 map.put("nombreAse", doc.getString("nombre"));
                 map.put("celular", doc.getString("celular"));
                 map.put("disponibilidad", doc.getString("disponibilidad"));
                 map.put("correo", doc.getString("correo"));
-
+                
+                //profe
+            }else{
+                Document doc = 
+                        gestor.getColUsu().find(new Document("nombre", myDoc.getString("asesorado"))).first();
+                map.put("ttesis", doc.getString("ttesis"));
             }
 
             map.put("reunion", gestor.obtenerReuniones());
@@ -166,6 +174,7 @@ public class Main {
             return new ModelAndView(map, "registrarReunion.html");
         }, new Jinja2TemplateEngine());
 
+        //alumnos
         post("/registrarReunion", (req, resp) -> {
             map.get("tipo_usuario");
             ConexionMongo gestor = new ConexionMongo();
@@ -174,17 +183,20 @@ public class Main {
             String obAlumno = req.queryParams("obAlumno");
 
             Document myDoc = new Document();
-            myDoc.append("nombre", map.get("nombre"));
-            myDoc.append("ttesis", map.get("ttesis"));
             myDoc.append("reunion", reunion);
             myDoc.append("obAlumno", obAlumno);
+            myDoc.append("obAsesor", "");
             myDoc.append("estado", "activo");
+            myDoc.append("autor", map.get("nombre"));
+            myDoc.append("ttesis", map.get("ttesis"));
+            myDoc.append("fecha", gestor.obtenerFecha());
 
             gestor.getColReunion().insertOne(myDoc);
 
             return new ModelAndView(map, "registrarReunion.html");
         }, new Jinja2TemplateEngine());
 
+        //profes
         get("/registroReunionProfe", (req, resp) -> {
             map.get("tipo_usuario");
             ConexionMongo gestor = new ConexionMongo();
@@ -197,10 +209,11 @@ public class Main {
             map.get("tipo_usuario");
             ConexionMongo gestor = new ConexionMongo();
             map.put("reuniones", gestor.obtenerReuniones());
-            
+
             String obAsesor = req.queryParams("obAsesor");
             String firmar = req.queryParams("firmar");
 
+            
             String[] cadena = firmar.split("&");
             String autor = cadena[0];
             String ttesis = cadena[1];
@@ -208,16 +221,16 @@ public class Main {
             String obAlumno = cadena[3];
 
             Document filtro = new Document();
-            filtro.append("nombre", autor);
+            filtro.append("autor", autor);
             filtro.append("ttesis", ttesis);
             filtro.append("reunion", reunion);
 
+            System.out.println(obAsesor);
+            
             Document myDoc = new Document();
             myDoc.append("obAsesor", obAsesor);
-            myDoc.append("fecha", gestor.obtenerFecha());
             myDoc.append("estado", "desactivado");
-            
-            
+
             gestor.getColReunion().updateOne(filtro, new Document("$set", myDoc));
 
             return new ModelAndView(map, "registroReunionProfe.html");

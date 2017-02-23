@@ -56,21 +56,21 @@ public class Main {
             map.put("nombre", myDoc.getString("nombre"));
             map.put("usuario", myDoc.getString("usuario"));
             map.put("asesorado", myDoc.getString("asesorado"));
-            
+
             //si es alumno 
             if (myDoc.getString("tipo").equalsIgnoreCase("alumno")) {
-                Document doc = 
-                        gestor.getColUsu().find(new Document("usuario", myDoc.getString("asesor"))).first();
+                Document doc
+                        = gestor.getColUsu().find(new Document("usuario", myDoc.getString("asesor"))).first();
                 //buscamos los datos del profe
                 map.put("nombreAse", doc.getString("nombre"));
                 map.put("celular", doc.getString("celular"));
                 map.put("disponibilidad", doc.getString("disponibilidad"));
                 map.put("correo", doc.getString("correo"));
-                
+
                 //profe
-            }else{
-                Document doc = 
-                        gestor.getColUsu().find(new Document("nombre", myDoc.getString("asesorado"))).first();
+            } else {
+                Document doc
+                        = gestor.getColUsu().find(new Document("nombre", myDoc.getString("asesorado"))).first();
                 map.put("ttesis", doc.getString("ttesis"));
             }
 
@@ -210,10 +210,10 @@ public class Main {
             ConexionMongo gestor = new ConexionMongo();
             map.put("reuniones", gestor.obtenerReuniones());
 
-            String obAsesor = req.queryParams("obAsesor");
+            String[] obAsesor = req.queryParamsValues("obAsesor");
             String firmar = req.queryParams("firmar");
+            String[] id = req.queryParamsValues("id");
 
-            
             String[] cadena = firmar.split("&");
             String autor = cadena[0];
             String ttesis = cadena[1];
@@ -225,10 +225,18 @@ public class Main {
             filtro.append("ttesis", ttesis);
             filtro.append("reunion", reunion);
 
-            System.out.println(obAsesor);
-            
+            int posicion = 0;
+            String dato = null;
+            for (int i = 0; i < obAsesor.length; i++) {
+                if (!obAsesor[i].isEmpty()) { 
+                    posicion=i;
+                    dato= obAsesor[i];
+                }
+            }
+            System.out.println(dato);
+
             Document myDoc = new Document();
-            myDoc.append("obAsesor", obAsesor);
+            myDoc.append("obAsesor", dato);
             myDoc.append("estado", "desactivado");
 
             gestor.getColReunion().updateOne(filtro, new Document("$set", myDoc));

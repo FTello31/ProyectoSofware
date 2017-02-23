@@ -23,11 +23,12 @@
         </thead>
         {% for reunion in reuniones %}
         <tr>
-            <td>{{reunion.autor}}</td>
+            <td>{{reunion.autor}} <input type="hidden" id="{{reunion._id}}" name="id" value="{{reunion._id}}"></td>
+            
             <td>{{reunion.ttesis}}</td>
             <td>{{reunion.reunion}}</td>
             <td><input type="text" class="form-control" 
-                       id="obAsesor" placeholder="Observaciones" name="obAsesor"></td>
+                       id="{{reunion._id}}" placeholder="Observaciones" name="obAsesor"></td>
             <td>{{reunion.obAlumno}}</td>
             <td>
                 <div class="radio">

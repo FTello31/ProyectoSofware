@@ -81,7 +81,8 @@ public class ConexionMongo {
                     cur.getString("estado"),
                     cur.getString("autor"),
                     cur.getString("ttesis"),
-                    cur.getString("fecha")
+                    cur.getString("fecha"),
+                    cur.getObjectId("_id").toString()
             ));
         }
         return reunion;
@@ -94,13 +95,15 @@ public class ConexionMongo {
         filtro.append("estado", "activo");
         
         for (Document cur : getColReunion().find(filtro)) {
-            reunion.add(new Reunion(cur.getString("reunion"),
+            reunion.add(new Reunion(
+                    cur.getString("reunion"),
                     cur.getString("obAlumno"),
                     cur.getString("obAsesor"),
                     cur.getString("estado"),
                     cur.getString("autor"),
                     cur.getString("ttesis"),
-                    cur.getString("fecha")
+                    cur.getString("fecha"),
+                    cur.getObjectId("_id").toString()
             ));
         }
         return reunion;

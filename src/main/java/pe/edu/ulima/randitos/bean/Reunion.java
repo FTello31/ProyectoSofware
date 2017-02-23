@@ -19,8 +19,9 @@ public class Reunion {
     private String autor;
     private String ttesis;
     private String fecha;
+    private String _id;
 
-    public Reunion(String reunion, String obAlumno, String obAsesor, String estado, String autor, String ttesis, String fecha) {
+    public Reunion(String reunion, String obAlumno, String obAsesor, String estado, String autor, String ttesis, String fecha, String _id) {
         this.reunion = reunion;
         this.obAlumno = obAlumno;
         this.obAsesor = obAsesor;
@@ -28,8 +29,18 @@ public class Reunion {
         this.autor = autor;
         this.ttesis = ttesis;
         this.fecha = fecha;
+        this._id = _id;
     }
 
+    public String getId() {
+        return _id;
+    }
+
+    public void setId(String _id) {
+        this._id = _id;
+    }
+
+    
     public String getFecha() {
         return fecha;
     }

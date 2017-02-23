@@ -50,25 +50,6 @@ public class ConexionMongo {
         colFeed = db.getCollection("feed");
     }
 
-    /*public List<Usuario> obtenerUsuario() {
-        List<Usuario> usuarios = new ArrayList<>();
-        ArrayList<Document> usuDocs
-                = (ArrayList<Document>) collection.find().into(new ArrayList());
-        usuDocs.stream().forEach((reg) -> {
-            usuarios.add(
-                    new Usuario(
-                            reg.getString("usuario"),
-                            reg.getString("password"),
-                            reg.getString("tipo")
-                    )
-            );
-        });
-        return usuarios;
-
-    }
-    
-     */
-
     public List<Reunion> obtenerActas() {
         List<Reunion> reunion = new ArrayList<>();
         Document filtro = new Document();
@@ -195,7 +176,7 @@ public class ConexionMongo {
     public String obtenerFecha() {
         Calendar cal = new GregorianCalendar();
         String dia = Integer.toString(cal.get(Calendar.DATE));
-        String mes = Integer.toString(cal.get(Calendar.MONTH));
+        String mes = Integer.toString(cal.get(Calendar.MONTH)+1);
         String annio = Integer.toString(cal.get(Calendar.YEAR));
 
         String fecha = dia + "/" + mes + "/" + annio;

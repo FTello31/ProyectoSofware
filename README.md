@@ -14,8 +14,8 @@ seguir los siguientes pasos:
 	
 -usuario   | contraseña				
 -Diego     | 123       
--Christian | 456        
--Fernando  | 789	 
+-Christian | 123       
+-Fernando  | 123	 
 	
 6. En caso no ingrese las credenciales
    correctas, el sistema no permitirá el 

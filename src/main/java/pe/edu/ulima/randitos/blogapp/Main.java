@@ -56,22 +56,20 @@ public class Main {
             map.put("nombre", myDoc.getString("nombre"));
             map.put("usuario", myDoc.getString("usuario"));
             map.put("asesorado", myDoc.getString("asesorado"));
+            map.put("asesor", myDoc.getString("asesor"));
+            map.put("ttesis", myDoc.getString("ttesis"));
 
             //si es alumno 
             if (myDoc.getString("tipo").equalsIgnoreCase("alumno")) {
-                Document doc
-                        = gestor.getColUsu().find(new Document("usuario", myDoc.getString("asesor"))).first();
-                //buscamos los datos del profe
-                map.put("nombreAse", doc.getString("nombre"));
-                map.put("celular", doc.getString("celular"));
-                map.put("disponibilidad", doc.getString("disponibilidad"));
-                map.put("correo", doc.getString("correo"));
-
-                //profe
-            } else {
-                Document doc
-                        = gestor.getColUsu().find(new Document("nombre", myDoc.getString("asesorado"))).first();
-                map.put("ttesis", doc.getString("ttesis"));
+                if (myDoc.getString("asesor") != null) {
+                    Document doc
+                            = gestor.getColUsu().find(new Document("usuario", myDoc.getString("asesor"))).first();
+                    //buscamos los datos del profe
+                    map.put("nombreAse", doc.getString("nombre"));
+                    map.put("celular", doc.getString("celular"));
+                    map.put("disponibilidad", doc.getString("disponibilidad"));
+                    map.put("correo", doc.getString("correo"));
+                } 
             }
 
             map.put("reunion", gestor.obtenerReuniones());
@@ -228,9 +226,9 @@ public class Main {
             int posicion = 0;
             String dato = null;
             for (int i = 0; i < obAsesor.length; i++) {
-                if (!obAsesor[i].isEmpty()) { 
-                    posicion=i;
-                    dato= obAsesor[i];
+                if (!obAsesor[i].isEmpty()) {
+                    posicion = i;
+                    dato = obAsesor[i];
                 }
             }
             System.out.println(dato);

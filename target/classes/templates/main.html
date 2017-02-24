@@ -11,7 +11,7 @@
             <th>Fecha</th>
             <th>Observación</th>
             <th>Estado</th>
-        
+
         </tr>
     </thead>
     <tbody class="table-hover"> 
@@ -41,28 +41,55 @@
             {% if tipo_usuario=='alumno' %}
             <tr>
                 <th>Nombre:</th>
+                 {% if nombreAse==null %}
+                <td>Todavia no tienes Asesor</td>
+                {% else %}
                 <td>{{nombreAse}}</td>
+                {% endif %}
+                
             </tr>
             <tr>
                 <th>Disponibilidad:</th>
+                 {% if disponibilidad==null %}
+                <td>Todavia no tienes Asesor</td>
+                {% else %}
                 <td>{{disponibilidad}}</td>
+                {% endif %}
+                
             </tr>
             <tr>
                 <th>Correo</th>
+                {% if correo==null %}
+                <td>Todavia no tienes Asesor</td>
+                {% else %}
                 <td>{{correo}}</td>
+                {% endif %}
+                
             </tr>
             <tr>
                 <th>Celular</th>
+                {% if celular==null %}
+                <td>Todavia no tienes Asesor</td>
+                {% else %}
                 <td>{{celular}}</td>
+                {% endif %}
             </tr>
             {% else %}
             <tr>
                 <th>Nombre:</th>
+                {% if asesorado==null %}
+                <td> Todavia no tiene Asesorado :( </td>
+                {% else %}
                 <td>{{asesorado}}</td>
+                {% endif %}
             </tr>
             <tr>
                 <th>Tema tesis:</th>
+                {% if ttesis==null %}
+                <td> Todavia no tiene Tesis :( </td>
+                {% else %}
                 <td>{{ttesis}}</td>
+                {% endif %}
             </tr>
 
             {% endif %}

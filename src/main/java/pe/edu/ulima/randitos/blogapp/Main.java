@@ -56,20 +56,22 @@ public class Main {
             map.put("nombre", myDoc.getString("nombre"));
             map.put("usuario", myDoc.getString("usuario"));
             map.put("asesorado", myDoc.getString("asesorado"));
-            map.put("asesor", myDoc.getString("asesor"));
-            map.put("ttesis", myDoc.getString("ttesis"));
 
             //si es alumno 
             if (myDoc.getString("tipo").equalsIgnoreCase("alumno")) {
-                if (myDoc.getString("asesor") != null) {
-                    Document doc
-                            = gestor.getColUsu().find(new Document("usuario", myDoc.getString("asesor"))).first();
-                    //buscamos los datos del profe
-                    map.put("nombreAse", doc.getString("nombre"));
-                    map.put("celular", doc.getString("celular"));
-                    map.put("disponibilidad", doc.getString("disponibilidad"));
-                    map.put("correo", doc.getString("correo"));
-                } 
+                Document doc
+                        = gestor.getColUsu().find(new Document("usuario", myDoc.getString("asesor"))).first();
+                //buscamos los datos del profe
+                map.put("nombreAse", doc.getString("nombre"));
+                map.put("celular", doc.getString("celular"));
+                map.put("disponibilidad", doc.getString("disponibilidad"));
+                map.put("correo", doc.getString("correo"));
+
+                //profe
+            } else {
+                Document doc
+                        = gestor.getColUsu().find(new Document("nombre", myDoc.getString("asesorado"))).first();
+                map.put("ttesis", doc.getString("ttesis"));
             }
 
             map.put("reunion", gestor.obtenerReuniones());

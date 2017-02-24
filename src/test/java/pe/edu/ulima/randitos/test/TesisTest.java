@@ -5,8 +5,8 @@
  */
 package pe.edu.ulima.randitos.test;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import pe.edu.ulima.randitos.blogapp.ConexionMongo;
 
 /**
@@ -26,11 +26,10 @@ public class TesisTest {
     }
     */
     
-    @Test
+    @Test   
     public void testLenght(){
         ConexionMongo gestor = new ConexionMongo();
         gestor.obtenerFeedback().size();
-        
         assertEquals("Cantidad de registros incorrectos", 0,gestor.obtenerTemas().size());
     }
     

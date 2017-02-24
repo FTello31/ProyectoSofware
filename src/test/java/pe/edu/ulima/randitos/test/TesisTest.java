@@ -18,13 +18,21 @@ public class TesisTest {
     public TesisTest() {
     }
     
-    
+    /*
     @Test
     public void testFecha(){
         ConexionMongo gestor = new ConexionMongo();
         assertEquals("fecha errada", "24/2/2017",gestor.obtenerFecha());
     }
+    */
     
+    @Test
+    public void testLenght(){
+        ConexionMongo gestor = new ConexionMongo();
+        gestor.obtenerFeedback().size();
+        
+        assertEquals("Cantidad de registros incorrectos", 0,gestor.obtenerTemas().size());
+    }
     
     
     

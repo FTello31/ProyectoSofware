@@ -22,7 +22,7 @@ public class TesisTest {
     @Test
     public void testFecha(){
         ConexionMongo gestor = new ConexionMongo();
-        assertEquals("fecha errada", "23/2/2017",gestor.obtenerFecha());
+        assertEquals("fecha errada", "24/2/2017",gestor.obtenerFecha());
     }
     
     

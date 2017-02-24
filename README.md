@@ -12,7 +12,7 @@ seguir los siguientes pasos:
 4. Ingresar al link: http://localhost:4567
 5. Ingresar alguno de los usuarios registrados
 	
--usuario   | contraseña				
+-Usuario   | contraseña				
 -Diego     | 123       
 -Christian | 123       
 -Fernando  | 123	 

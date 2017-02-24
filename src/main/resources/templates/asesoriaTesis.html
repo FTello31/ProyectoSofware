@@ -8,43 +8,45 @@
 <!-- home section -->
 
 <form method="post" action="asesoriaTesis">
-<div>
-    <h3>Temas para asesorar</h3>
-</div>
-<table class="table table-hover">
-    <thead>
-        <tr class="success">
-            <th>Título de tesis</th>
-            <th>Especialidad</th>
-            <th>Explicación del tema de tesis</th>
-            <th>¿Deseo asesorar?</th>
-        </tr>
-    </thead>
-    <tbody class="table-hover">
+    <div>
+        <h3>Temas para asesorar</h3>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr class="success">
+                <th>Título de tesis</th>
+                <th>Especialidad</th>
+                <th>Explicación del tema de tesis</th>
+                <th>¿Deseo asesorar?</th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
 
-        {% for tema in temas %}
-        <tr>
-            <td>{{tema.ttesis}}</td>
-            <td>{{tema.escuela}}</td>
-            <td>{{tema.etema}}</td>
-           
-            <!--<td>{{tema.asesor}}</td>-->
-            <td>
-                <div class="radio">
-                    <label>
-                        <input name="aprobar" value="{{tema.ttesis}}&{{tema.escuela}}&{{tema.etema}}&{{tema.asesor}}&{{tema.autor}}"  type="radio"> Acepto
-                    </label>
-                </div>
-            </td>
-        </tr>
-        {% endfor %}
+            {% for tema in temas %}
+            <tr>
+                <td>{{tema.ttesis}}</td>
+                <td>{{tema.escuela}}</td>
+                <td>{{tema.etema}}</td>
 
-    </tbody>
-</table>
-    
-<button type="submit" class="btn btn-primary" 
-        onclick="alert('¡Estas aceptando asesorar')" >Enviar respuesta
-</button>
+                <!--<td>{{tema.asesor}}</td>-->
+                <td>
+                    <div class="radio">
+                        <label>
+                            <input name="aprobar" 
+                                   value="{{tema.ttesis}}&{{tema.escuela}}&{{tema.etema}}&{{tema.asesor}}&{{tema.autor}}"  
+                                   type="radio" required> Acepto
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary" 
+            onclick="alert('¡Estas aceptando asesorar')" >Enviar respuesta
+    </button>
 
 </form>
 <!-- Fin Contenido del sitio -->

@@ -14,10 +14,10 @@ seguir los siguientes pasos:
 4. Ingresar al link: http://localhost:4567
 5. Ingresar alguno de los usuarios registrados
 	
--Usuario   | contraseña				
--Diego     | 123       
--Christian | 123       
--Fernando  | 123	 
+-Usuario   | contraseña
+-Diego     | 123 (alumno)
+-Fernando  | 123 (alumno)
+-LLamas    | 123 (profesor)
 	
 6. En caso no ingrese las credenciales
    correctas, el sistema no permitirá el 
